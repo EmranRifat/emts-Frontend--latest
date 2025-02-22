@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+.material-textfield {
+  position: relative;
+}
+
+.material-textfield label {
+  position: absolute;
+  font-size: 1.125rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: 0.1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+
+html.dark .material-textfield label {
+  background-color: #18181b;
+}
+
+.material-textfield input {
+  font-size: 1.2rem;
+  outline: none;
+  padding: 0.5rem 0.7rem;
+  transition: 0.1s ease-out;
+}
+
+html.dark.material-textfield input {
+  background-color: #18181b;
+}
+html.light.material-textfield input {
+  background-color: #dedee6;
+}
+
+.material-textfield input:focus {
+}
+
+.material-textfield input:focus + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-textfield input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-textarea {
+  position: relative;
+}
+
+.material-textarea label {
+  position: absolute;
+  font-size: 1.125rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: 0.1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+
+html.dark .material-textarea label {
+  background-color: #18181b;
+}
+
+.material-textarea textarea {
+  font-size: 1.2rem;
+  outline: none;
+
+  transition: 0.1s ease-out;
+}
+
+html.dark .material-textarea textarea {
+  background-color: #18181b;
+}
+
+.material-textarea textarea:focus {
+}
+
+.material-textarea textarea:focus + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-textarea textarea:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-select {
+  position: relative;
+  width: 100%;
+}
+
+.material-select-text {
+  position: relative;
+  font-family: inherit;
+  /* background-color: transparent; */
+  padding: 0.5rem 0.7rem;
+  font-size: 1.2rem;
+  border: 2px solid #e4e4e7;
+  width: 100%;
+}
+
+/* Remove focus */
+.material-select-text:focus {
+  outline: none;
+  border: 2px solid #006a4e;
+}
+
+/* Use custom arrow */
+.material-select .material-select-text {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.material-select:after {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  /* Styling the down arrow */
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: "";
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.12);
+
+  pointer-events: none;
+}
+
+/* LABEL ======================================= */
+.material-select-label {
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: 0.1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+
+/* active state */
+.material-select-text:focus ~ .material-select-label,
+.material-select-text:valid ~ .material-select-label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-select-text:valid:not(focus) ~ .material-select-label {
+  /* background: red; */
+}
+
+.material-select-text:valid:focus ~ .material-select-label {
+  /* color: orange; */
+}
+
+/* for long press */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
