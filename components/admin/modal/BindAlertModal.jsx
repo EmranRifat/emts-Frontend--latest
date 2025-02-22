@@ -65,7 +65,7 @@ const BindAlertModal = ({
         {(onClose) => (
           <>
             {/* Header */}
-            <ModalHeader className="flex flex-col gap-1 text-center text-gray-400 bg-red-300">
+            <ModalHeader className="flex flex-col gap-1 text-center text-gray-400 bg-red-300 dark:bg-darkblack-500 dark:text-gray-300">
               Confirmation
             </ModalHeader>
 
@@ -77,7 +77,7 @@ const BindAlertModal = ({
                 width={86}
                 alt="Alert icon"
               />
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
                 Do you want to bind the user with the selected POS Machine and
                 SIM number combo?
               </p>

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useState } from "react";
 import { Avatar, ScrollShadow, Spacer, Tooltip } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
@@ -5,58 +7,53 @@ import { useMediaQuery } from "usehooks-ts";
 import Link from "next/link";
 import { cn } from "@nextui-org/react";
 import { sectionItemsWithTeams } from "./sidebar-items";
-import Image from "next/image";
 import { useRequisitionWithPendingCount } from "lib/hooks/admin/requisition/useRequisitionWithPendingCount";
 
 function CustomSidebar({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 768px)"); // Detect mobile screens
   const isCompact = isCollapsed || isMobile;
 
   const toggleSidebar = useCallback(() => {
     setIsCollapsed((prev) => !prev);
   }, []);
 
-
   const pageSize = 10;
   const page = 1;
   const search = "";
-  const { countPendingRequisition, refetch_requisitions } =
-    useRequisitionWithPendingCount(page, pageSize, search);
-
-
+  const { countPendingRequisition } = useRequisitionWithPendingCount(page, pageSize, search);
 
   return (
-    <div className="flex h-screen w-full ">
-      {/* Sidebar Container */}
+    <div className="flex h-screen w-full overflow-hidden">
+      {/* ✅ Sidebar */}
       <aside
         className={cn(
-          "relative flex h-full w-72 flex-col border-r border-divider bg-[#223C55] dark:bg-[#1D1E24] p-6 text-white transition-all",
-          { "w-16 items-center md:px-2 pl-2 md:pl-0 py-6": isCompact }
+          "relative flex flex-col h-full min-h-screen w-72 border-r border-divider bg-[#223C55] dark:bg-[#1D1E24] p-6 text-white transition-all",
+          {
+            "w-16 items-center px-2 py-6": isCompact,
+            "hidden": isMobile, // Hide sidebar on mobile
+          }
         )}
       >
-       
-        {/* Toggle Button - Top Right */}
+        {/* ✅ Toggle Button */}
         <button
           onClick={toggleSidebar}
-          className="absolute top-4 right-4  p-2  rounded-md bg-gray-700 hover:bg-gray-600 text-white"
+          className="absolute top-4 right-4 p-2 rounded-md bg-gray-700 hover:bg-gray-600 text-white"
           aria-label="Toggle Sidebar"
         >
           <Icon icon="solar:sidebar-minimalistic-outline" width={20} />
         </button>
 
-        <ScrollShadow className="-mr-6 h-full max-h-full pt-8 pr-6">
+        {/* ✅ Sidebar Content */}
+        <ScrollShadow className="flex-1 -mr-6 h-full max-h-full pt-8 pr-6 overflow-auto">
           {sectionItemsWithTeams.map((section) => (
             <Link href={section.href} key={section.key} passHref>
               <div
                 className={cn(
-                  "flex items-center px- py-3 text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer",
+                  "flex items-center py-3 px-4 text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer",
                   { "justify-center": isCompact }
                 )}
               >
-                {/* <span className="px-2 py-1">   {section.icon}</span>
-                {!isCompact && <span>{section.title}</span>} */}
-
                 <div className="flex">
                   <span className="px-2 py-1">{section.icon}</span>
                   {section.title === "Requisition" ? (
@@ -64,9 +61,7 @@ function CustomSidebar({ children }) {
                       {!isCompact && <span>{section.title}</span>}
                       {!isCompact && (
                         <span className="text-success-500 rounded-full text-sm px-1 mt-0.5">
-                          {countPendingRequisition > 0
-                            ? `(${countPendingRequisition})`
-                            : "(0)"}
+                          {countPendingRequisition > 0 ? `(${countPendingRequisition})` : "(0)"}
                         </span>
                       )}
                     </>
@@ -79,11 +74,9 @@ function CustomSidebar({ children }) {
           ))}
         </ScrollShadow>
 
-        {/* Footer with Tooltips */}
+        {/* ✅ Footer with Tooltips */}
         <Spacer y={2} />
-        <div
-          className={cn("mt-auto flex flex-col", { "items-center": isCompact })}
-        >
+        <div className={cn("mt-auto flex flex-col pb-6", { "items-center": isCompact })}>
           <Tooltip content="Help & Feedback" placement="right">
             <button
               onClick={() => console.log("Help Clicked")}
@@ -105,9 +98,9 @@ function CustomSidebar({ children }) {
         </div>
       </aside>
 
-      {/* Main Content */}
-      <div className="w-full flex-1 flex-col p-3">
-        <main className="mt-4 h-full w-full overflow-auto ">{children}</main>
+      {/* ✅ Main Content */}
+      <div className="w-full flex-1 flex flex-col p-3 min-h-screen overflow-auto">
+        <main className="mt-4 h-full w-full">{children}</main>
       </div>
     </div>
   );

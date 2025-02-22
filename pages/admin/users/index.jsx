@@ -36,9 +36,10 @@ function Users() {
 
   } = useAllUsersData(token, search, page, pageSize);
 
-  // console.log("onboardUsers_state !!!!!!!!!!!", onboardUsers_state?.data?.data);
+  console.log("onboardUsers_state ", onboardUsers_state?.data.total_pages);
 
   const current_page = onboardUsers_state?.data?.current_page;
+  console.log("current_page", current_page);
   const handleInputPageChange = (e) => {
     setInputPage(e.target.value);
   };
@@ -125,7 +126,7 @@ function Users() {
                     <AutocompleteItem
                       key={number}
                       value={number}
-                      className="text-black"
+                      className="text-black dark:text-white"
                       style={{ fontSize: "12px" }}
                       onClick={() => handleValueChange(number)}
                     >
@@ -165,7 +166,7 @@ function Users() {
                 showShadow
                 color="primary"
                 page={current_page || 1}
-                total={current_page?.data?.total_pages || 5}
+                total={ onboardUsers_state?.data.total_pages || 5}
                 onChange={(page) => setCurrentPage(page)}
                 className="overflow-x-auto"
               />

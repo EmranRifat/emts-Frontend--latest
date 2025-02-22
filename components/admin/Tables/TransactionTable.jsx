@@ -79,9 +79,9 @@ function TransactionTable({
 
   return (
     <div>
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600 ">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400  bg-white dark:bg-darkblack-600">
-          <thead className="text-md text-gray-700 uppercase bg-[#dde4eb] dark:bg-gray-700 dark:text-gray-400 ">
+      <div className="overflow-x-auto relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-md text-gray-700 uppercase bg-[#dde4eb] dark:bg-gray-700 dark:text-gray-300">
             <tr>
               <th scope="col" className="py-3 px-6">
                 SL
@@ -150,97 +150,87 @@ function TransactionTable({
 
           <tbody className="bg-white dark:bg-darkblack-600">
             {hasTransactions ? (
-              transactions.map((transaction, index) => {
-                return (
-                  <tr
-                    key={index}
-                    className={`hover:bg-gray-200 cursor-pointer 
-                    ${
-                      index % 2 === 0
-                        ? transaction.type === "operator"
-                          ? "bg-red-100"
-                          : "bg-gray-100"
-                        : transaction.type === "operator"
-                        ? "bg-red-50"
-                        : "bg-white"
-                    }`}
-                    onClick={() => handleRowClick(transaction)}
-                    // key={index}
-                    // className={`hover:bg-gray-200 cursor-pointer ${
-                    //   index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                    // }`}
-                    // onClick={() => handleRowClick(transaction)}
-                  >
-                    <td className="py-1 px-6">
-                      {index + 1 + (currentPage - 1) * pageSize}
-                    </td>
-                    <td className="py-1 px-6">
-                      {transaction.transaction_date}
-                    </td>
-                    <td className="py-1 px-6">{transaction.post_office}</td>
-                  
-                   <td className="py-2 px-6  ">
-                      {transaction.sender_name} ({transaction.sender_user_type})
-                      <br />
-                      <span className="text-xs text-gray-400">
-                        {transaction.sender_phone}
-                      </span>
-                    </td>
-
-                    <td className="py-2 px-6 ">
-                      {transaction.receiver_name} (
-                      {transaction.receiver_user_type === "accountant"
-                        ? "Postmaster"
-                        : transaction.receiver_user_type}
-                      )
-                      <br />
-                      <span className="text-xs text-gray-400">
-                        {transaction.receiver_phone}
-                      </span>
-                    </td>
-                    <td className="py-1 px-6">
-                      <span className="flex">
-                        {new Intl.NumberFormat("en-IN", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        }).format(transaction.transaction_amount)}
-                      </span>
-                    </td>
-
-                    <td className="py-1 px-6">{transaction.transaction_fee}</td>
-                    <td className="py-1 px-6">{transaction.delivery_fee}</td>
-                    <td
-                      className="py-1 px-6 text-sm trnx-id relative"
-                      title={transaction.transaction_id}
+              transactions.map((transaction, index) => (
+                <tr
+                  key={index}
+                  className={`hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer 
+          ${
+            index % 2 === 0
+              ? transaction.type === "operator"
+                ? "bg-red-100 dark:bg-red-900"
+                : "bg-gray-100 dark:bg-gray-800"
+              : transaction.type === "operator"
+              ? "bg-red-50 dark:bg-red-700"
+              : "bg-white dark:bg-darkblack-600"
+          }`}
+                  onClick={() => handleRowClick(transaction)}
+                >
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {index + 1 + (currentPage - 1) * pageSize}
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.transaction_date}
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.post_office}
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.sender_name} ({transaction.sender_user_type})
+                    <br />
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {transaction.sender_phone}
+                    </span>
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.receiver_name} (
+                    {transaction.receiver_user_type})
+                    <br />
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {transaction.receiver_phone}
+                    </span>
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    <span className="flex">
+                      {new Intl.NumberFormat("en-IN", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).format(transaction.transaction_amount)}
+                    </span>
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.transaction_fee}
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.delivery_fee}
+                  </td>
+                  <td className="py-2 px-6 text-sm text-gray-700 dark:text-gray-300">
+                    <button
+                      className="flex items-center gap-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyToClipboard(transaction.transaction_id);
+                      }}
                     >
-                      <button
-                        className="flex items-center gap-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          copyToClipboard(transaction.transaction_id);
-                        }}
-                      >
-                        {abbreviateId(transaction.transaction_id)}
-                        <p className="opacity-0 hover:opacity-100 absolute -mt-6 text-white text-sm bg-gray-700 p-1 rounded">
-                          Copy ID
-                        </p>
-                      </button>
-
-                      {copiedId === transaction.transaction_id && (
-                        <span className="text-green-500 absolute ">
-                          Copied!
-                        </span>
-                      )}
-                    </td>
-                    <td className="py-1 px-6">
-                      {transaction.transaction_type}
-                    </td>
-                  </tr>
-                );
-              })
+                      {abbreviateId(transaction.transaction_id)}
+                      <p className="opacity-0 hover:opacity-100 absolute -mt-6 text-white text-sm bg-gray-700 p-1 rounded">
+                        Copy ID
+                      </p>
+                    </button>
+                    {copiedId === transaction.transaction_id && (
+                      <span className="text-green-500 absolute">Copied!</span>
+                    )}
+                  </td>
+                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
+                    {transaction.transaction_type}
+                  </td>
+                </tr>
+              ))
             ) : (
               <tr>
-                <td colSpan="9" className="text-center py-1 px-6 font-semibold">
+                <td
+                  colSpan="10"
+                  className="text-center py-3 px-6 text-gray-700 dark:text-gray-300"
+                >
                   No transactions found.
                 </td>
               </tr>

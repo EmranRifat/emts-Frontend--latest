@@ -12,7 +12,7 @@ import cookies from "js-cookie";
 import { useAllTransactionData } from "lib/hooks/admin/transaction/fetchAllTransaction";
 import Image from "next/image";
 
-const numbers = ["20", "30", "40", "50", "60", "70", "80", "90", "100"];
+const numbers = ["10","20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
 const TransactionComponent = () => {
     const [search, setSearch] = useState("");
@@ -109,7 +109,7 @@ const TransactionComponent = () => {
                                             <AutocompleteItem
                                                 key={number}
                                                 value={number}
-                                                className="text-black"
+                                                className="text-black dark:text-white"
                                                 style={{ fontSize: "12px" }}
                                                 onClick={() => handleValueChange(number)}
                                             >

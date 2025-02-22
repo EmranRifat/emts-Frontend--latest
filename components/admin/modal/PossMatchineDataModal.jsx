@@ -201,12 +201,12 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
             {/* Details for - {user?.first_name} {user?.last_name} */}
           </ModalHeader>
           <ModalBody>
-            <div className="space-y-4">
+            <div className="space-y-4 dark:text-gray-400">
               <div className="flex border-b">
                 {/* User Details */}
-                <div className="pb-4">
+                <div className="pb-4 ">
                   <strong className="text-lg">Details of - </strong>{" "}
-                  <span className="text-lg text-gray-700 font-semibold">
+                  <span className="text-lg font-semibold">
                     {user?.first_name} {user?.last_name}
                   </span>
                   <p>
@@ -223,42 +223,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                   </p>
                 </div>
 
-                {/* Bind and Unbind Actions */}
-                {/* <div className="flex justify-center md:ml-24">
-                  {userStatus === "disabled" ? (
-                    <Button
-                      onPress={handleUserEnable}
-                      variant="ghost"
-                      className="text-green-500"
-                      endContent={
-                        <Image
-                          src="/Tableicon/success.svg"
-                          alt="Enable icon"
-                          width={16}
-                          height={16}
-                        />
-                      }
-                    >
-                      Enable
-                    </Button>
-                  ) : (
-                    <Button
-                      onPress={handleUserDisable}
-                      variant="ghost"
-                      className="text-red-500"
-                      endContent={
-                        <Image
-                          src="/Tableicon/disable.svg"
-                          alt="Disable icon"
-                          width={16}
-                          height={16}
-                        />
-                      }
-                    >
-                      Disable
-                    </Button>
-                  )}
-                </div> */}
+               
                <div className="flex justify-center md:pl-24">
                 {userStatus === "disabled" ? (
                   <Button
@@ -321,8 +286,8 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-darkblack-600 text-sm">
-                    {Array.isArray(possData) && possData.length > 0 ? (
+                  <tbody className="bg-white dark:bg-darkblack-600 !important text-sm">
+                  {Array.isArray(possData) && possData.length > 0 ? (
                       posMachineData.map((poss, index) => (
                         <tr
                           key={index}
@@ -417,7 +382,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="error" onClick={handleCloseModal}>
+            <Button className="dark:text-red-600 darkfont-semibold" color="error" onClick={handleCloseModal}>
               Close
             </Button>
           </ModalFooter>

@@ -110,7 +110,7 @@ function CartThree({
     ],
   };
   return (
-    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b from-[#A0DBB9] to-[#EEFFF5] dark:bg-darkblack-600">
+    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b from-[#A0DBB9] to-[#EEFFF5] dark:bg-darkblack-600 dark:bg-none">
       <div className="mb-5  flex items-center justify-between">
         <div className="flex items-center space-x-[7px]">
           <div className="icon">
@@ -151,16 +151,8 @@ function CartThree({
                 parseFloat(transactionCount_state?.data?.total_paid_amount).toFixed(2) : 
                 '0.00'
               )}{" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 30"
-                x="0px"
-                y="0px"
-                className="w-8 h-8 mt-2.5 "
-              >
-                <title>taka_bangladesh_trade_BDT</title>
-                <path d="M17,14a2,2,0,0,0-.18,4,3.09,3.09,0,0,1-.8,1.24A3,3,0,0,1,13.7,20,3.13,3.13,0,0,1,11,16.83V12h4a1,1,0,0,0,0-2H11V6A3,3,0,0,0,5,6,1,1,0,0,0,7,6,1,1,0,0,1,9,6v4H7a1,1,0,0,0,0,2H9v4.83A5.14,5.14,0,0,0,13.51,22L14,22a5,5,0,0,0,5-5V16A2,2,0,0,0,17,14Z" />
-              </svg>
+             <span className="px-2">৳</span>
+
             </div>
           </div>
           <div className="flex items-center space-x-1   mt-4 whitespace-nowrap">

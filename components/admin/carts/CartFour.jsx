@@ -113,7 +113,7 @@ function CartFour({
     ],
   };
   return (
-    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b from-[#d37474] to-[#EEFFF5] dark:bg-darkblack-600">
+    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b from-[#d37474] to-[#EEFFF5] dark:bg-darkblack-600 dark:bg-none">
       <div className="mb-5  flex items-center justify-between">
         <div className="flex items-center space-x-[7px]">
           <div className="icon">

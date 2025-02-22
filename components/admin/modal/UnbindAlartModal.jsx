@@ -66,7 +66,7 @@ const UnbindAlartModal = ({
         {(onClose) => (
           <>
             {/* Header */}
-            <ModalHeader className="flex flex-col gap-1 text-center text-gray-400">
+            <ModalHeader className="flex flex-col gap-1 text-center text-gray-400 dark:bg-darkblack-500 dark:text-gray-300">
               Confirmation
             </ModalHeader>
 
@@ -78,7 +78,7 @@ const UnbindAlartModal = ({
                 width={86}
                 alt="Alert icon"
               />
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
                 Do you want to{" "}
                 <span className="text-primary font-bold underline text-xl">
                   Unbind
