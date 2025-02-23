@@ -43,7 +43,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
       >
         {() => (
           <>
-            <ModalHeader className="flex flex-col gap-1 border-b text-lg font-semibold text-gray-800 dark:text-white bg-darkblack-600">
+            <ModalHeader className="flex flex-col gap-1 border-b text-lg font-semibold text-gray-800 dark:text-white dark:bg-darkblack-600">
               <div className="flex gap-3 text-gray-600 dark:text-white">
                 Transaction Details
                 {details_data?.data?.first_type === "Sending" &&
@@ -86,7 +86,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
               </div>
             </ModalHeader>
 
-            <ModalBody className="text-black dark:text-white bg-darkblack-500">
+            <ModalBody className="text-black dark:text-white dark:bg-darkblack-500">
               {post_state_loading || post_state_fetching ? (
                 <Spinner color="accent" isLoading>
                   Loading

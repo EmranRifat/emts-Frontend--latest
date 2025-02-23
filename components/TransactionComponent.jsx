@@ -10,7 +10,6 @@ import {
 } from "@nextui-org/react";
 import cookies from "js-cookie";
 import { useAllTransactionData } from "lib/hooks/admin/transaction/fetchAllTransaction";
-import Image from "next/image";
 
 const numbers = ["10","20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
@@ -21,9 +20,29 @@ const TransactionComponent = () => {
     const [inputPage, setInputPage] = useState("");
     const [pageSize, setPageSize] = useState(10);
     const [selectedValue, setSelectedValue] = useState("10");
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        setToken(cookies.get("access"));
+    }, []);
+    
 
 
-    const token = cookies.get("access");
+
+    const { data: transactions_state, isLoading, isFetching, error, refetch } =
+        useAllTransactionData(token, search, date, page, pageSize);
+    
+    if (!token) return <p>Loading...</p>; // ✅ Only return loading state, do not skip the hook
+    
+
+   // Call the hook unconditionally but prevent execution when token is missing
+   // const { data: transactions_state, isLoading, error } = useAllTransactionData(token, search, date, page, pageSize);
+
+   if (!token) return <p>Loading...</p>;
+   if (error) return <p className="text-red-500">Error: {error.message}</p>;
+
+
+
 
 
     const handleInputPageChange = (e) => {
@@ -46,14 +65,14 @@ const TransactionComponent = () => {
         setPageSize(value);
     };
 
-    const {
-        isFetched: is_transaction_fetched,
-        data: transactions_state,
-        error: transaction_state_error,
-        isLoading: transaction_state_loading,
-        isFetching: transaction_state_fetching,
-        refetch: refetch_transaction,
-    } = useAllTransactionData(token, search, date, page, pageSize);
+    // const {
+    //     isFetched: is_transaction_fetched,
+    //     data: transactions_state,
+    //     error: transaction_state_error,
+    //     isLoading: transaction_state_loading,
+    //     isFetching: transaction_state_fetching,
+    //     refetch: refetch_transaction,
+    // } = useAllTransactionData(token, search, date, page, pageSize);
 
     const transactions = transactions_state?.data?.data;
     const current_page = transactions_state?.data?.current_page;
@@ -62,8 +81,9 @@ const TransactionComponent = () => {
         return null;
     }
 
-    const shouldShowPagination =
-        !transaction_state_loading && transactions?.length > 0;
+
+    // const shouldShowPagination =!transaction_state_loading && transactions?.length > 0;
+    const shouldShowPagination = !isLoading && transactions?.length > 0; 
 
     const setCurrentPage = (page_number) => {
         setPage(page_number);
@@ -81,21 +101,23 @@ const TransactionComponent = () => {
                 <div className="dark:bg-darkblack-600 dark:text-gray-400">
                     <TransactionTable
                         transactions={transactions}
-                        isLoading={transaction_state_loading || transaction_state_fetching}
+                        isLoading={isLoading || isFetching}
                         loop
                         showControls
-                        error={transaction_state_error}
+                        error={error}
                         currentPage={current_page}
                         pageSize={pageSize}
                     />
                 </div>
 
-                {shouldShowPagination && (
+
+                {!isLoading && transactions?.length > 0 && (
                     <div className="mt-6">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
                             {/* Left-aligned controls */}
                             <div className="flex justify-start items-start gap-4">
-                                <div className="flex items-center">
+                        
+                          <div className="flex items-center">
                                     <Autocomplete
                                         defaultValue={selectedValue}
                                         labelPlacement="outside-left"
@@ -140,6 +162,7 @@ const TransactionComponent = () => {
                                     )}
                                 </div>
                             </div>
+
 
                             {/* Centered pagination */}
                             <div className="flex justify-center items-center w-full md:w-auto mt-4 md:mt-0">

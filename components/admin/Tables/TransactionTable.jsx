@@ -112,12 +112,12 @@ function TransactionTable({
                 Tx ID
               </th>
               <th scope="col" className="py-3 px-6">
-                <Dropdown>
+                <Dropdown className=" dark:bg-darkblack-500">
                   <DropdownTrigger>
                     <h1 className="flex items-center cursor-pointer">
                       {selectedTxType}
                       <svg
-                        className="ml-2 h-4 w-4"
+                        className="ml-2 h-4 w-4 dark:bg-gray-600"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -133,7 +133,7 @@ function TransactionTable({
                     </h1>
                   </DropdownTrigger>
                   <DropdownMenu
-                    className="text-gray-500"
+                    className="text-gray-500 dark:text-gray-400"
                     aria-label="Transaction Type"
                     onAction={handleSelect}
                   >
@@ -204,8 +204,11 @@ function TransactionTable({
                     {transaction.delivery_fee}
                   </td>
                   <td className="py-2 px-6 text-sm text-gray-700 dark:text-gray-300">
+                
+
                     <button
-                      className="flex items-center gap-1"
+                      className="flex items-center gap-1 relative"
+                      title={transaction.transaction_id} // ✅ Show full ID on hover
                       onClick={(e) => {
                         e.stopPropagation();
                         copyToClipboard(transaction.transaction_id);
@@ -216,6 +219,7 @@ function TransactionTable({
                         Copy ID
                       </p>
                     </button>
+
                     {copiedId === transaction.transaction_id && (
                       <span className="text-green-500 absolute">Copied!</span>
                     )}
