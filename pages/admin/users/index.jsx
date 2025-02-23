@@ -44,6 +44,7 @@ function Users() {
     setInputPage(e.target.value);
   };
 
+  
   const handleGoToPage = () => {
     const pageNumber = parseInt(inputPage, 10);
     if (

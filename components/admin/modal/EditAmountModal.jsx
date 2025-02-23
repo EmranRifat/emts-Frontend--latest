@@ -85,7 +85,7 @@ function ApproveAmountRequisitionModal({ show,onCloseModal,amount,userId, requis
             </div>
           </ModalHeader>
 
-          <ModalBody className="text-black">
+          <ModalBody className="text-black dark:text-white">
             <div className="flex flex-col space-y-4  px-4 ">
               {/* Post Office Row */}
               <div className="flex justify-between">

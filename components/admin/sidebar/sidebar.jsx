@@ -8,12 +8,13 @@ import Link from "next/link";
 import { cn } from "@nextui-org/react";
 import { sectionItemsWithTeams } from "./sidebar-items";
 import { useRequisitionWithPendingCount } from "lib/hooks/admin/requisition/useRequisitionWithPendingCount";
-
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 function CustomSidebar({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)"); // Detect mobile screens
   const isCompact = isCollapsed || isMobile;
-
+   const router = useRouter();
   const toggleSidebar = useCallback(() => {
     setIsCollapsed((prev) => !prev);
   }, []);
@@ -22,6 +23,14 @@ function CustomSidebar({ children }) {
   const page = 1;
   const search = "";
   const { countPendingRequisition } = useRequisitionWithPendingCount(page, pageSize, search);
+
+
+  const handleLogout = async () => {
+      router.push("/admin/login");
+      Cookies.remove("access");
+      Cookies.remove("refresh");
+    }
+
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
@@ -82,13 +91,13 @@ function CustomSidebar({ children }) {
               onClick={() => console.log("Help Clicked")}
               className="text-white flex items-center gap-2 p-2 hover:bg-gray-800 rounded-lg"
             >
-              <Icon icon="solar:info-circle-line-duotone" width={24} />
-              {!isCompact && "Help & Information"}
+              {/* <Icon icon="solar:info-circle-line-duotone" width={24} />
+              {!isCompact && "Help & Information"} */}
             </button>
           </Tooltip>
           <Tooltip content="Log Out" placement="right">
             <button
-              onClick={() => console.log("Log Out")}
+              onClick={() =>handleLogout()}
               className="text-white flex items-center gap-2 p-2 hover:bg-gray-800 rounded-lg mt-3"
             >
               <Icon icon="solar:minus-circle-line-duotone" width={24} />

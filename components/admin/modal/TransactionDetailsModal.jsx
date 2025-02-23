@@ -43,8 +43,8 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
       >
         {() => (
           <>
-            <ModalHeader className="flex flex-col gap-1 border-b text-lg font-semibold text-gray-800">
-              <div className="flex gap-3 text-gray-600">
+            <ModalHeader className="flex flex-col gap-1 border-b text-lg font-semibold text-gray-800 dark:text-white bg-darkblack-600">
+              <div className="flex gap-3 text-gray-600 dark:text-white">
                 Transaction Details
                 {details_data?.data?.first_type === "Sending" &&
                   details_data?.data?.second_type === "Receiving" && (
@@ -86,7 +86,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
               </div>
             </ModalHeader>
 
-            <ModalBody className="text-black">
+            <ModalBody className="text-black dark:text-white bg-darkblack-500">
               {post_state_loading || post_state_fetching ? (
                 <Spinner color="accent" isLoading>
                   Loading
@@ -104,8 +104,8 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                         <div className="flex gap-4 justify-center border-b py-4">
                           {/* Opening Transaction Details */}
                           <div>
-                            <div className=" flex ">
-                              <h4 className="font-semibold text-lg mb-2 text-gray-500">
+                            <div className=" flex dark:text-white">
+                              <h4 className="font-semibold text-lg mb-2 text-gray-500 ">
                                 Sending Transaction Details
                               </h4>
                               <img
@@ -264,11 +264,11 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                   {details_data?.data?.first_type === "Sending" &&
                     details_data?.data?.second_type === "empty" && (
                       <div>
-                        <div className="flex gap-4 border-b">
+                        <div className="flex gap-4 border-b dark:text-white">
                           {/* Opening Transaction Details */}
                           <div>
-                            <div className="flex  ">
-                              <h4 className="font-semibold text-lg mb-2 text-gray-500">
+                            <div className="flex ">
+                              <h4 className="font-semibold text-lg mb-2 text-gray-500 dark:text-white">
                                 Sending Transaction Details
                               </h4>
                               <img
@@ -327,7 +327,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
 
                           <div className="pb-4 mb-4 ">
                             <div className="flex  ">
-                              <h4 className="font-semibold text-lg mb-2 text-gray-500">
+                              <h4 className="font-semibold text-lg mb-2 text-gray-500 dark:text-white">
                                 Receiving Transaction Details
                               </h4>
                               <img
@@ -397,10 +397,10 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                   {details_data?.data?.second_type === "Receiving" &&
                     details_data?.data?.first_type === "empty" && (
                       <div>
-                        <div className="flex gap-8 border-b justify-center py-4">
+                        <div className="flex gap-8 border-b justify-center py-4 dark:text-white">
                           {/* Opening Transaction Details */}
                           <div>
-                            <h4 className="font-semibold text-lg mb-2 text-gray-500">
+                            <h4 className="font-semibold text-lg mb-2 text-gray-500 dark:text-white">
                               Sending Transaction Details
                             </h4>
 
@@ -463,7 +463,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                           </div>
 
                           <div className="pb-4 mb-4 ">
-                            <h4 className="font-semibold text-lg mb-2 text-gray-500 ">
+                            <h4 className="font-semibold text-lg mb-2 text-gray-500 dark:text-white ">
                               Receiving Transaction Details
                             </h4>
 
@@ -534,8 +534,8 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                   {type === "Closing" && (
                     <div>
                       <div className="flex gap-4 border-b py-4 ">
-                        <div className="pb-4 mb-4">
-                          <h4 className="font-semibold text-lg mb-2 text-gray-500">
+                        <div className="pb-4 mb-4 dark:text-white">
+                          <h4 className="font-semibold text-lg mb-2 text-gray-500 dark:text-white">
                             Closing Transaction Details
                           </h4>
                           {details_data?.data?.second_trans_id === "empty" ? (
@@ -599,7 +599,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                   )}
                   {type === "Opening" && (
                     <div>
-                      <div className="flex gap-4 border-b py-4 ">
+                      <div className="flex gap-4 border-b py-4 dark:text-white ">
                         <div>
                           <h4 className="font-semibold text-lg mb-2 text-gray-500">
                             {details_data?.data?.first_type} Details
@@ -671,7 +671,7 @@ function TransactionDetailModal({ show, onClose, transaction, type }) {
                 </>
               )}
             </ModalBody>
-            <ModalFooter>
+            <ModalFooter className="dark:bg-darkblack-600">
               <Button color="danger" variant="light" onPress={onClose}>
                 Close
               </Button>

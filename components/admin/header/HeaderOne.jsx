@@ -28,7 +28,8 @@ function HeaderOne() {
 
   return (
     <header className=" z-30 w-full bg-[#C41C22] ">
-      <div className="flex h-[70px] w-full justify-between items-center px-6 md:px-10 dark:bg-darkblack-700">
+      <div className="flex h-[70px] w-full justify-between items-center px-6 md:px-10 dark:bg-darkblack-400">
+        
         {/* ✅ Mobile Menu Button */}
         <button
           aria-label="Toggle Sidebar"
@@ -56,12 +57,12 @@ function HeaderOne() {
 
         {/* ✅ Mobile Sidebar Menu */}
         <div
-          className={`fixed top-0 left-0 z-40 w-[250px] h-screen bg-[#223C55] text-white transition-transform duration-300 ${
+          className={`fixed top-0 left-0 z-40 w-[200px] h-screen bg-[#223C55] text-white transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
           } md:hidden`}
         >
           <div className="flex justify-between items-center px-6 h-[70px] border-b border-gray-500">
-            <span className="text-lg font-semibold">Menu</span>
+            <h1 className="text-lg font-semibold">Menu</h1>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-xl"
@@ -78,28 +79,28 @@ function HeaderOne() {
               Dashboard
             </Link>
             <Link
-              href="/transaction"
+              href="/admin/transaction"
               className="block text-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Transaction
             </Link>
             <Link
-              href="/users"
+              href="/admin/users"
               className="block text-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Users
             </Link>
             <Link
-              href="/self_operator"
+              href="/admin/self_operator"
               className="block text-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Self Operator
             </Link>
             <Link
-              href="/requisition"
+              href="/admin/requisition"
               className="block text-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >

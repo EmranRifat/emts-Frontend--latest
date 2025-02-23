@@ -111,13 +111,13 @@ function OperatorTable({ operators, isLoading, error, refetch }) {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {hasOperators ? (
               operators.data.map((operator, index) => (
                 <tr
                   key={index}
                   className={`hover:bg-gray-200 cursor-pointer ${
-                    index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                    index % 2 === 0 ? "bg-white dark:bg-darkblack-600" : "bg-gray-100 dark:bg-darkblack-500"
                   }`}
                 >
                   <td className="py-3 px-6">{index + 1}</td>

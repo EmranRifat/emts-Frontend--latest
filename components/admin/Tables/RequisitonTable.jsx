@@ -283,7 +283,7 @@ function RequisitionTable({
                 return (
                   <tr
                     key={index}
-                    className={`hover:bg-gray-200  cursor-pointer ${
+                    className={`hover:bg-gray-200  cursor-pointer dark:bg-darkblack-500 ${
                       index % 2 === 0 ? "bg-white" : "bg-[#F1F8FF] "
                     }`}
                   >

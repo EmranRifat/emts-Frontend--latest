@@ -78,7 +78,7 @@ function TopTransactions({ filter }) {
                     <tr
                       key={index}
                       className={`hover:bg-gray-300 transition duration-200 ${
-                        index % 2 === 0 ? "bg-white dark:!bg-darkblack-500" : "bg-gray-100 dark:!bg-darkblack-600"
+                        index % 2 === 0 ? "bg-white dark:!bg-darkblack-400" : "bg-gray-100 dark:!bg-darkblack-500"
                       }`}
                     >
                       <td className="py-1.5 px-3 md:px-4">{index + 1}</td>

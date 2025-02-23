@@ -154,15 +154,15 @@ function TransactionTable({
                 <tr
                   key={index}
                   className={`hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer 
-          ${
-            index % 2 === 0
-              ? transaction.type === "operator"
-                ? "bg-red-100 dark:bg-red-900"
-                : "bg-gray-100 dark:bg-gray-800"
-              : transaction.type === "operator"
-              ? "bg-red-50 dark:bg-red-700"
-              : "bg-white dark:bg-darkblack-600"
-          }`}
+                      ${
+                        index % 2 === 0
+                          ? transaction.type === "operator"
+                            ? "bg-red-100 dark:bg-red-900"
+                            : "bg-gray-100 dark:bg-darkblack-600"
+                          : transaction.type === "operator"
+                          ? "bg-red-50 dark:bg-red-700"
+                          : "bg-white dark:bg-darkblack-500"
+                      }`}
                   onClick={() => handleRowClick(transaction)}
                 >
                   <td className="py-2 px-6 text-gray-700 dark:text-gray-300">

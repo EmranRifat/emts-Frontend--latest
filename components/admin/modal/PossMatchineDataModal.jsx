@@ -192,7 +192,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
   return (
     <div>
       <Modal
-        className="text-gray-800"
+        className="text-gray-800 dark:bg-darkblack-600"
         isOpen={isModalOpen}
         onOpenChange={handleCloseModal}
       >
@@ -201,7 +201,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
             {/* Details for - {user?.first_name} {user?.last_name} */}
           </ModalHeader>
           <ModalBody>
-            <div className="space-y-4 dark:text-gray-400">
+            <div className="space-y-4 dark:text-gray-300">
               <div className="flex border-b">
                 {/* User Details */}
                 <div className="pb-4 ">
@@ -258,7 +258,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
               </div>
               {error && <p className="text-red-500">{error}</p>}
 
-              <h1 className="text-lg text-gray-600 font-semibold">
+              <h1 className="text-lg text-gray-600 dark:text-gray-200 font-semibold">
                 All Binding Data
               </h1>
               {/* POS Machine Data Table */}

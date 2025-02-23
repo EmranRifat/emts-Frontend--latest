@@ -84,7 +84,7 @@ function ApproveAmountModal({ show, onClose, userId, token, action, refetch }) {
     >
       <ModalContent>
         <ModalHeader>
-          <h3 className="text-2xl font-semibold text-gray-700">
+          <h3 className="text-2xl font-semibold text-gray-700 dark:text-darkblack-300">
             Approve Amount
           </h3>
         </ModalHeader>

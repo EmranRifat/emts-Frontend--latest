@@ -74,19 +74,19 @@ const ApexChart = ({ timeFrame }) => {
     },
   };
 
-  if (barCharts_state_loading) return <p>Loading...</p>;
-  if (barCharts_state_error) return <p>Error: {barCharts_state_error.message}</p>;
+  // if (barCharts_state_loading) return <p>Loading...</p>;
+  // if (barCharts_state_error) return <p>Error: {barCharts_state_error.message}</p>;
 
   return (
-    <div className="rounded-md shadow-lg md:w-3/5 w-full ">
+    <div className="rounded-md shadow-lg md:w-3/5 w-full dark:bg-darkblack-600 bg-white p-4">
       <div id="chart">
-        <h1 className="text-gray-600 text-xl px-4 py-2">Revenue Flow</h1>
+        <h1 className="text-gray-600 dark:text-white text-xl px-4 py-2">Revenue Flow</h1>
         <ReactApexChart
           options={options}
           series={series}
           type="bar"
           height={350}
-          className=" w-full"
+          className=" w-full "
         />
       </div>
     </div>

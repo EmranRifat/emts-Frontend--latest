@@ -47,9 +47,6 @@ function Operators() {
   };
 
 
-
-
-
   const {
     isFetched: is_transaction_fetched,
     data: operators_state,
