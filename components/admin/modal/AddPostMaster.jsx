@@ -168,7 +168,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
       >
         <ModalContent>
           <Card>
-            <div className="border-b bg-postLight dark:bg-postDark ">
+            <div className="border-b bg-gray-300 dark:bg-postDark ">
               <CardHeader className=" gap-4 ml-8  mt-4 ">
                 <Image
                   src="/logo/logo-post.svg"

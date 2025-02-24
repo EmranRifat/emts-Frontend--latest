@@ -30,17 +30,15 @@ const ApexChart = ({ timeFrame }) => {
     }
   }, [barCharts_state]);
 
+
   const options = {
     chart: {
       type: "bar",
       height: 350,
       stacked: false,
-      toolbar: {
-        show: true,
-      },
-      zoom: {
-        enabled: true,
-      },
+      toolbar: { show: true },
+      zoom: { enabled: true },
+      background: "transparent",
     },
     plotOptions: {
       bar: {
@@ -49,44 +47,52 @@ const ApexChart = ({ timeFrame }) => {
         endingShape: "rounded",
       },
     },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"],
-    },
+    dataLabels: { enabled: false },
+    stroke: { show: true, width: 2, colors: ["transparent"] },
+   
     xaxis: {
       categories: categories,
+      labels: {
+       
+      },
     },
+   
     yaxis: {
       title: {
         text: "$ (thousands)",
+       className: "dark:text-white",
       },
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return "$ " + val + " thousands";
+     
+      
+      labels: {
+        className: "dark:text-white",
+        style: {
+          // colors: ["var(--text-color)"],
         },
       },
     },
+
+
+    tooltip: {
+      theme: "dark",
+      y: {
+        formatter: (val) => "$ " + val + " thousands",
+      },
+    },
   };
-
-  // if (barCharts_state_loading) return <p>Loading...</p>;
-  // if (barCharts_state_error) return <p>Error: {barCharts_state_error.message}</p>;
-
+  
   return (
-    <div className="rounded-md shadow-lg md:w-3/5 w-full dark:bg-darkblack-600 bg-white p-4">
+    <div className="rounded-md shadow-lg md:w-3/5 w-full bg-white dark:bg-darkblack-600 p-4 transition-all duration-300">
       <div id="chart">
-        <h1 className="text-gray-600 dark:text-white text-xl px-4 py-2">Revenue Flow</h1>
+        <h1 className="text-gray-600 dark:text-white text-xl px-4 py-2">
+          Revenue Flow
+        </h1>
         <ReactApexChart
           options={options}
           series={series}
           type="bar"
           height={350}
-          className=" w-full "
+          className="w-full dark:bg-darkblack-500 dark:text-gray-400 p-2 rounded-md "
         />
       </div>
     </div>

@@ -14,7 +14,7 @@ const MaterialSelect = ({
                 <div className="material-select text-gray-700 dark:text-postLight">
                    
                     <select
-                        className={`material-select-text border-postLight bg-white dark:bg-black rounded-md ${isDisabled ? "opacity-50" : ""}`}
+                        className={`material-select-text border-postLight bg-white dark:bg-darkblack-600 rounded-md ${isDisabled ? "opacity-50" : ""}`}
                         required={isRequired}
                         id={id}
                         name={name}

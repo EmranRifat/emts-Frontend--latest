@@ -151,7 +151,7 @@ const UpdatePostMaster = ({
       >
         <ModalContent>
           <Card>
-            <div className="border-b bg-slate-200 ">
+            <div className="border-b bg-slate-200 dark:bg-darkblack-400 ">
               <CardHeader className=" gap-4 ml-8   ">
                 <Image
                   src="/logo/logo-post.svg"
@@ -159,11 +159,14 @@ const UpdatePostMaster = ({
                   width={42}
                   height={42}
                 />
-                <h2 className="font-semibold text-gray-700 text-xl ">
+                <h2 className="font-semibold text-gray-700 dark:text-white text-xl ">
                   Edit Onboarding Form
                 </h2>
               </CardHeader>
             </div>
+
+
+
 
             <ModalBody>
               {error && (

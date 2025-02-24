@@ -133,7 +133,7 @@ function VerifyOTPforPOChallanModal({
           </div>
         </ModalHeader>
 
-        <ModalBody className="text-black">
+        <ModalBody className="text-black dark:text-white">
           <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
             {/* Post Office */}
             <p>Post Office </p>

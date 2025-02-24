@@ -13,14 +13,14 @@ const MaterialInput = ({
 }) => {
   return (
     <div>
-      <div className="material-textfield w-full  bg-white dark:bg-black  ">
+      <div className="material-textfield w-full  bg-white dark:bg-darkblack-600  ">
         <input
           placeholder=" "
           type={type}
           className={`w-full ${
             readOnly && showOnly
               ? "border-none bg-transparent text-gray-700 dark:text-white cursor-default"
-              : "border-medium border-postLight rounded-md text-gray-800 dark:text-postLight  bg-white dark:bg-black "
+              : "border-medium border-gray-300 rounded-md text-gray-800 dark:text-postLight  bg-white dark:bg-darkblack-600 "
           }`}
           id={id}
           name={name}

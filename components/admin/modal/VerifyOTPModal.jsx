@@ -136,8 +136,8 @@ function OtpModal({
             <span>Approve Requisition</span>
           </div>
         </ModalHeader>
-
-        <ModalBody className="text-black">
+ 
+        <ModalBody className="text-black dark:text-white">
           <div className="flex flex-col space-y-2">
             {/* Post Office Row */}
             <div className="flex justify-between">
