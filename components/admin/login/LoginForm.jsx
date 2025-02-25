@@ -45,8 +45,10 @@ function LoginForm() {
 
       mutate(values, {
         onSuccess: (response) => {
+          console.log("login User Response == >>>", response);
           console.log("Form submitted successfully");
           console.log("response", response);
+          
           if (response.access && response.refresh) {
             Cookies.set("access", response.access);
             Cookies.set("refresh", response.refresh);

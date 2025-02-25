@@ -19,15 +19,15 @@ function HeaderOne() {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+console.log("user>>>>", user);
   const handleLogout = async () => {
     router.push("/admin/login");
     Cookies.remove("access");
     Cookies.remove("refresh");
   };
 
-  return (
-    <header className=" z-30 w-full bg-[#C41C22] ">
+  return ( 
+    <header className=" z-30 w-full bg-[#C41C22]">
       <div className="flex h-[70px] w-full justify-between items-center px-6 md:px-10 dark:bg-darkblack-400">
         
         {/* ✅ Mobile Menu Button */}
@@ -42,7 +42,7 @@ function HeaderOne() {
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="w-8 h-8 text-white transition-transform duration-300"
+            className="w-8 h-8 text-white transition-transform duration-300 mr-4"
             style={{
               transform: isMobileMenuOpen ? "rotate(90deg)" : "rotate(0deg)",
             }}
@@ -100,7 +100,7 @@ function HeaderOne() {
               Self Operator
             </Link>
             <Link
-              href="/admin/requisition"
+              href="/admin/requisiton"
               className="block text-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -134,11 +134,11 @@ function HeaderOne() {
         </Link>
 
         {/* ✅ Right-Side User Section */}
-        <div className="ml-auto flex items-center space-x-5">
+        <div className="ml-auto flex items-center space-x-3">
           <ModeToggler />
 
-          <p className="text-white">
-            {user?.userName ? user.userName : "Guest"}
+          <p className="text-white text-sm ">
+            {user?.userName ? user.userName : ""}
             {user?.userType ? ` (${user.userType.toUpperCase()})` : ""}
           </p>
           {/* ✅ User Dropdown */}

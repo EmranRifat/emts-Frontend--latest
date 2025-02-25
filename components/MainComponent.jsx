@@ -81,12 +81,12 @@ const MainComponent = () => {
                             {timeFrame} ⌵
                         </Button>
                     </DropdownTrigger>
-                    <DropdownMenu className="text-[#223C55] dark:text-white shadow-lg rounded-lg border border-gray-300 bg-white dark:bg-darkblack-600 mt-1" aria-label="Time Frame Selection">
+                    <DropdownMenu className="text-[#223C55] dark:text-white shadow-lg rounded-lg border border-gray-300 bg-white dark:bg-darkblack-500 mt-1" aria-label="Time Frame Selection">
                         {["hourly", "daily", "weekly", "monthly", "fortnightly", "yearly"].map((frame) => (
                             <DropdownItem
                                 key={frame}
                                 onClick={() => setTimeFrame(frame)}
-                                className="py-2 px-4 hover:bg-gray-100 transition-colors"
+                                className="py-2 px-4 hover:bg-gray-100 transition-colors duration-300 ease-in-out" 
                             >
                                 {frame.charAt(0).toUpperCase() + frame.slice(1)}
                             </DropdownItem>
@@ -98,7 +98,7 @@ const MainComponent = () => {
             <div className="2xl:flex 2xl:space-x-12 relative">
                 <div className="mb-6 2xl:mb-0 2xl:flex-1">
                     <CartsWidget timeFrame={timeFrame} />
-                    <div className="mb-6 xl:flex xl:space-x-6 pt-6 flex-wrap space-y-6 ">
+                    <div className="mb-6 xl:flex xl:space-x-6 pt-6 flex-wrap md:space-y-0  space-y-6">
                         <ApexChart timeFrame={timeFrame} />
                         <TopTransactions filter={timeFrame} />
                     </div>

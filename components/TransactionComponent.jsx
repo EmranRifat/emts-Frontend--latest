@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useState, useEffect } from "react";
 import TransactionTable from "components/admin/Tables/TransactionTable";
@@ -29,14 +30,11 @@ const TransactionComponent = () => {
 
 
 
-    const { data: transactions_state, isLoading, isFetching, error, refetch } =
-        useAllTransactionData(token, search, date, page, pageSize);
+    const { data: transactions_state, isLoading, isFetching, error, refetch } = useAllTransactionData(token, search, date, page, pageSize);
     
-    if (!token) return <p>Loading...</p>; // ✅ Only return loading state, do not skip the hook
     
 
    // Call the hook unconditionally but prevent execution when token is missing
-   // const { data: transactions_state, isLoading, error } = useAllTransactionData(token, search, date, page, pageSize);
 
    if (!token) return <p>Loading...</p>;
    if (error) return <p className="text-red-500">Error: {error.message}</p>;
@@ -65,14 +63,7 @@ const TransactionComponent = () => {
         setPageSize(value);
     };
 
-    // const {
-    //     isFetched: is_transaction_fetched,
-    //     data: transactions_state,
-    //     error: transaction_state_error,
-    //     isLoading: transaction_state_loading,
-    //     isFetching: transaction_state_fetching,
-    //     refetch: refetch_transaction,
-    // } = useAllTransactionData(token, search, date, page, pageSize);
+
 
     const transactions = transactions_state?.data?.data;
     const current_page = transactions_state?.data?.current_page;

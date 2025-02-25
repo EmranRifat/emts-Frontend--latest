@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Avatar, ScrollShadow, Spacer, Tooltip } from "@nextui-org/react";
 import { Icon } from "@iconify/react";
 import { useMediaQuery } from "usehooks-ts";
@@ -10,37 +8,65 @@ import { sectionItemsWithTeams } from "./sidebar-items";
 import { useRequisitionWithPendingCount } from "lib/hooks/admin/requisition/useRequisitionWithPendingCount";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+
 function CustomSidebar({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)"); // Detect mobile screens
+  const [isMobile, setIsMobile] = useState(false);
   const isCompact = isCollapsed || isMobile;
-   const router = useRouter();
-  const toggleSidebar = useCallback(() => {
-    setIsCollapsed((prev) => !prev);
-  }, []);
+  const router = useRouter();
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
+  // const toggleSidebar = useCallback(() => {
+  //   setIsCollapsed((prev) => !prev);
+  // }, []);
+  const toggleSidebar = useCallback(() => {
+    if (isMobile) {
+      setSidebarVisible((prev) => !prev);
+    } else {
+      setIsCollapsed((prev) => !prev);
+    }
+  }, [isMobile]);
   const pageSize = 10;
   const page = 1;
   const search = "";
-  const { countPendingRequisition } = useRequisitionWithPendingCount(page, pageSize, search);
+  const { countPendingRequisition } = useRequisitionWithPendingCount(
+    page,
+    pageSize,
+    search
+  );
 
+  // ✅ Ensure hydration is complete before rendering dynamic content
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setSidebarVisible(false);
+      }
+    };
+
+    handleResize(); // Run on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleLogout = async () => {
-      router.push("/admin/login");
-      Cookies.remove("access");
-      Cookies.remove("refresh");
-    }
-
+    router.push("/admin/login");
+    Cookies.remove("access");
+    Cookies.remove("refresh");
+  };
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
-      {/* ✅ Sidebar */}
       <aside
         className={cn(
-          "relative flex flex-col h-full min-h-screen w-72 border-r border-divider bg-[#223C55] dark:bg-[#1D1E24] p-6 text-white transition-all",
+          "fixed md:relative flex flex-col h-full min-h-screen w-72 border-r border-divider bg-[#223C55] dark:bg-[#1D1E24] p-6 text-white transition-all duration-300 ease-in-out",
           {
-            "w-16 items-center px-2 py-6": isCompact,
-            "hidden": isMobile, // Hide sidebar on mobile
+            "w-16 items-center px-2 py-6": isCollapsed && !isMobile, // Collapse mode on desktop
+            "hidden md:flex": isMobile && !sidebarVisible, // Hide on mobile unless toggled
           }
         )}
       >
@@ -65,12 +91,17 @@ function CustomSidebar({ children }) {
               >
                 <div className="flex">
                   <span className="px-2 py-1">{section.icon}</span>
+
                   {section.title === "Requisition" ? (
                     <>
                       {!isCompact && <span>{section.title}</span>}
                       {!isCompact && (
                         <span className="text-success-500 rounded-full text-sm px-1 mt-0.5">
-                          {countPendingRequisition > 0 ? `(${countPendingRequisition})` : "(0)"}
+                          {isClient
+                            ? countPendingRequisition !== undefined
+                              ? `(${countPendingRequisition})`
+                              : "(0)"
+                            : "..."}
                         </span>
                       )}
                     </>
@@ -83,21 +114,21 @@ function CustomSidebar({ children }) {
           ))}
         </ScrollShadow>
 
-        {/* ✅ Footer with Tooltips */}
         <Spacer y={2} />
-        <div className={cn("mt-auto flex flex-col pb-6", { "items-center": isCompact })}>
+        <div
+          className={cn("mt-auto flex flex-col pb-6", {
+            "items-center": isCompact,
+          })}
+        >
           <Tooltip content="Help & Feedback" placement="right">
             <button
               onClick={() => console.log("Help Clicked")}
               className="text-white flex items-center gap-2 p-2 hover:bg-gray-800 rounded-lg"
-            >
-              {/* <Icon icon="solar:info-circle-line-duotone" width={24} />
-              {!isCompact && "Help & Information"} */}
-            </button>
+            ></button>
           </Tooltip>
           <Tooltip content="Log Out" placement="right">
             <button
-              onClick={() =>handleLogout()}
+              onClick={() => handleLogout()}
               className="text-white flex items-center gap-2 p-2 hover:bg-gray-800 rounded-lg mt-3"
             >
               <Icon icon="solar:minus-circle-line-duotone" width={24} />

@@ -44,7 +44,7 @@ function TopTransactions({ filter }) {
 
   return (
     <div className="flex-1 xl:block">
-      <div className="rounded-lg bg-[#0055d471] dark:!bg-darkblack-600 shadow-lg">
+      <div className="rounded-lg bg-[#0055d471] dark:!bg-darkblack-600 shadow-lg ">
         <div className="flex items-center justify-between border-b border-gray-300 dark:border-darkblack-400 px-5">
           <h3 className="text-lg md:text-xl font-bold text-bgray-900 dark:text-white py-3 flex gap-2">
             <Image width={20} height={20} src="/logo/topTransLogo.svg" alt="logo" />
