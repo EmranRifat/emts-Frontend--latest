@@ -158,18 +158,30 @@ console.log("user>>>>", user);
               />
             </DropdownTrigger>
 
-            <DropdownMenu
-              aria-label="Profile Actions"
-              className="py-2 px-4 rounded-lg shadow-lg bg-white"
-            >
-              <DropdownItem
-                key="logout"
-                className="text-red-600 font-bold hover:bg-red-100 rounded-md"
-                onClick={handleLogout}
-              >
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
+          <DropdownMenu
+            aria-label="Profile Actions"
+            className="py-2 px-4 rounded-lg shadow-lg bg-white dark:bg-darkblack-400"
+          >
+  
+
+          <DropdownItem
+            key="profile"
+            className="text-gray-600 font-bold hover:bg-gray-100 rounded-md"
+          >
+            <p className="text-gray-800 dark:text-white text-sm"> 
+              {user?.userName ? user.userName : ""}
+              {user?.userType ? ` (${user.userType.toUpperCase()})` : " "}
+            </p>
+          </DropdownItem>
+          <DropdownItem
+            key="logout"
+            className="text-red-600 font-bold hover:bg-red-100 rounded-md"
+            onClick={handleLogout}
+          >
+            Log Out
+          </DropdownItem>
+        </DropdownMenu>
+
           </Dropdown>
         </div>
       </div>
