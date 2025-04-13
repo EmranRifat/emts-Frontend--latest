@@ -25,18 +25,7 @@ function CartOne({
 }) {
   const chartRef = useRef(null);
   const token = Cookies.get("access");
-
-  // console.log("timeFrame one===>>", timeFrame, token);
-
-  // const {
-  //   data: transactionCount_state,
-  //   isLoading: transactionCount_state_loading,
-  //   error: transactionCount_state_error,
-  //   isFetching: transactionCount_state_fetching,
-  //   refetch: refetch_transactionCount,
-  // } = useAllTransactiuonCount(token, timeFrame);
-
-  //   console.log("transactionCount_state///////",transactionCount_state);
+console.log("timeFrame", timeFrame);
 
   useEffect(() => {
     // // Get canvas context and create gradient
@@ -89,6 +78,7 @@ function CartOne({
       },
     },
   };
+
   const labels = [
     "Jan",
     "Feb",
@@ -123,6 +113,7 @@ function CartOne({
       },
     ],
   };
+
   return (
     <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b from-[#7FB0FF] to-[#E9F2FC] dark:bg-darkblack-600 dark:bg-none ">
       <div className="mb-5  flex items-center justify-between">
@@ -152,6 +143,9 @@ function CartOne({
           />
         </div> */}
       </div>
+
+
+
       <div className="flex items-end justify-between">
         <div className="flex-1">
           <div className=" ">
@@ -174,6 +168,9 @@ function CartOne({
             </div>
           </div>
 
+        
+        
+        
           <div className="flex items-center space-x-1  mt-4 whitespace-nowrap">
             <span>
               <svg
@@ -197,9 +194,12 @@ function CartOne({
             <span className="text-sm font-medium text-success-300">
               {groth}
             </span>
+            
             <p className="text-sm font-medium text-bgray-700 dark:text-bgray-50 inline whitespace-nowrap">
-              from last {timeFrame}
+              from{" "}
+              {timeFrame === "fortnightly" ? "last 15 days" : ` ${timeFrame}`}
             </p>
+
           </div>
         </div>
          <div className="w-[106px] h-[68px] ">
