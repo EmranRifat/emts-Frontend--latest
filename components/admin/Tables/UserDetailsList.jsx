@@ -17,25 +17,6 @@ export default function UserDetailsTable() {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch data using the correct function
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       setLoading(true);
-  //       const id = 7;  // Substitute with actual ID
-  //       const user_type = "operator";  // Substitute with actual user type
-
-  //       const result = await get_users_details(id, user_type);
-  //       if (result.status === "success") {
-  //         setUserData(result.data);
-  //       } else {
-  //         console.error("Failed to fetch user data:", result.message);
-  //       }
-  //       setLoading(false);
-  //     };
-
-  //     fetchData();
-  //   }, []);
-
   const columns = [
     { header: "User ID", accessorKey: "id" },
     { header: "Transaction IDs", accessorKey: "emts_transaction_ids" },

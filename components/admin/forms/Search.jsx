@@ -1,53 +1,21 @@
 import Image from "next/image";
 
-function Search({ search, setSearch}) {
-
+function Search({ search, setSearch }) {
   return (
-
-    <div className="hidden h-12 rounded-lg border bg-bgray-100 px-[18px]  focus-within:border-success-300 dark:bg-darkblack-500 sm:block sm:w-full ">
-      <div className="flex h-full w-full items-center space-x-[15px]">
-      
-       <span>
-          {/* <svg
-            className="stroke-bgray-900 dark:stroke-white"
-            width="21"
-            height="22"
-            viewBox="0 0 21 22"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="9.80204"
-              cy="10.6761"
-              r="8.98856"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M16.0537 17.3945L19.5777 20.9094"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg> */}
-          
-          <Image height={22} width={22}  src="/logo/search.svg" alt="" />
+    <div className="w-full">
+      <div className="relative">
+        <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <Image src="/logo/search.svg" alt="Search" height={18} width={18} />
         </span>
 
-
-        
-        <label htmlFor="listSearch" className="w-full">
-
-          <input
-            type="text"
-            id="listSearch"
-            placeholder="Search here ..."
-            className="search-input w-full border-none bg-bgray-100 px-0 text-sm tracking-wide text-bgray-600 placeholder:text-sm placeholder:font-medium placeholder:text-primary-500 focus:outline-none focus:ring-0 dark:bg-darkblack-500"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)} 
-          />
-        </label>
+        <input
+          type="text"
+          id="listSearch"
+          placeholder="Search here..."
+          className="w-full pl-10 pr-4 py-3 rounded-md border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-darkblack-600 text-sm text-gray-700 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
     </div>
   );

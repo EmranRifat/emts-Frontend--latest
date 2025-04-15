@@ -79,10 +79,10 @@ function TransactionTable({
 
   return (
     <div>
-     
-      <div className="overflow-x-auto shadow-lg rounded-xl border border-gray-200 dark:border-gray-700">
-  <table className="min-w-full text-sm text-left text-gray-700 dark:text-gray-300">
-    <thead className="text-xs font-semibold uppercase tracking-wider bg-gray-100 dark:bg-darkblack-500">
+  
+     <div className="overflow-x-auto shadow-lg rounded-xl border border-gray-200 dark:border-gray-700">
+     <table className="w-full min-w-[800px] text-sm text-left text-gray-700 dark:text-gray-300">
+     <thead className="text-xs font-semibold uppercase tracking-wider bg-gray-300 dark:bg-darkblack-500">
       <tr>
         {[
           "SL", "Date & Time", "Post Office", "Sender & Type", "Receiver & Type",
@@ -136,7 +136,7 @@ function TransactionTable({
           const rowClass = `hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer ${
             index % 2 === 0
               ? transaction.type === "operator"
-                ? "bg-red-50 dark:bg-red-900"
+                ? "bg-red-100 dark:bg-red-800"
                 : "bg-white dark:bg-darkblack-600"
               : transaction.type === "operator"
               ? "bg-red-100 dark:bg-red-800"
@@ -170,24 +170,8 @@ function TransactionTable({
               </td>
               <td className="px-4 py-3">{transaction.transaction_fee}</td>
               <td className="px-4 py-3">{transaction.delivery_fee}</td>
-              {/* <td className="px-4 py-3">
-                <button
-                  className="text-blue-600 dark:text-blue-400 hover:underline relative"
-                  title="Click to copy"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    copyToClipboard(transaction.transaction_id);
-                  }}
-                >
-                  {abbreviateId(transaction.transaction_id)}
-                </button>
-                {copiedId === transaction.transaction_id && (
-                  <span className="ml-2 text-green-500 text-xs">Copied!</span>
-                )}
-              </td> */}
-                   <td className="text-blue-600 dark:text-blue-400 relative">
+              <td className="text-blue-600 dark:text-blue-400 relative px-4 py-3">
                 
-
                 <button
                   className="flex items-center gap-1 relative"
                   title={transaction.transaction_id} // ✅ Show full ID on hover

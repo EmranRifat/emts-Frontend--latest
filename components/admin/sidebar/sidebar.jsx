@@ -139,7 +139,7 @@ function CustomSidebar({ children }) {
       </aside>
 
       {/* ✅ Main Content */}
-      <div className="w-full flex-1 flex flex-col p-3 min-h-screen overflow-auto">
+      <div className="w-full flex-1 flex flex-col min-h-screen overflow-auto">
         <main className="mt-4 h-full w-full">{children}</main>
       </div>
     </div>

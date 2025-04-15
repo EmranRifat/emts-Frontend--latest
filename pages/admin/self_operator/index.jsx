@@ -80,7 +80,7 @@ function Operators() {
       <div className=" space-y-5">
         <div className="flex h-[56px] w-full space-x-4 justify-between">
           <Search search={search} setSearch={setSearch} />
-       <span>
+       <span className="hidden md:block">
        <Filter options={["Operator", "Emts", "Postman"]} />
        </span>
         </div>
@@ -94,76 +94,7 @@ function Operators() {
           />
         </div>
 
-        {/* {shouldShowPagination && (
-          <div>
-            <div className="flex gap-6">
-              <div>
-                <Autocomplete
-                  defaultValue={selectedValue}
-                  labelPlacement="outside-left"
-                  label={<span className="text-gray-600">Show :</span>}
-                  className="max-w-xs"
-                  placeholder={selectedValue}
-                  style={{ width: "30px", color: "black" }}
-                  variant="bordered"
-                >
-                  {numbers.map((number) => (
-                    <AutocompleteItem
-                      className="text-black"
-                      key={number}
-                      value={selectedValue}
-                      style={{ fontSize: "12px" }}
-                      onClick={() => handleValueChange(number)}
-                    >
-                      {number}
-                    </AutocompleteItem>
-                  ))}
-                </Autocomplete>
 
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <p className="text-gray-600 text-sm">Go to page :</p>
-                <input
-                  type="text"
-                  className="border bg-white dark:bg-darkblack-600 border-gray-300 rounded px-2 py-1 w-16 text-center text-gray-600"
-                  placeholder="1"
-                  value={inputPage}
-                  onChange={handleInputPageChange}
-                />
-                {inputPage && (
-                  <Button
-                    onClick={handleGoToPage}
-                    color="primary"
-                    variant="faded"
-                    size="sm"
-                  >
-                    Go ≫
-                  </Button>
-                )}
-              </div>
-
-             
-            </div>
-            <div className="flex justify-center items-center  ">
-            <Pagination
-              isCompact
-              showControls
-              showShadow
-              color="primary"
-              page={operators_state?.data?.current_page || 1}
-              total={
-                operators_state?.data?.total_pages
-                  ? Math.ceil(operators_state?.data?.total_pages)
-                  : 5
-              }
-              onChange={(page) => setCurrentPage(page)}
-              className="overflow-x-visible"
-            />
-          </div>
-          </div>
-        )}
-        */}
             {shouldShowPagination && (
           <div className="mt-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
@@ -173,10 +104,10 @@ function Operators() {
                   <Autocomplete
                     defaultValue={selectedValue}
                     labelPlacement="outside-left"
-                    label={<span className="text-gray-600">Show :</span>}
+                    label={<span className="text-gray-600">Show:</span>}
                     className="max-w-xs"
                     placeholder={selectedValue}
-                    style={{ width: "80px", color: "black" }}
+                    style={{ width: "25px", color: "black" }}
                     variant="bordered"
                   >
                     {numbers.map((number) => (
@@ -194,7 +125,7 @@ function Operators() {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <p className="text-gray-600 text-sm">Go to page :</p>
+                  <p className="text-gray-600 text-sm">Go to page:</p>
                   <input
                     type="text"
                     className="border border-gray-300 bg-white dark:bg-darkblack-600 rounded px-2 py-1 w-12 md:w-16 text-center text-gray-600"
