@@ -79,169 +79,151 @@ function TransactionTable({
 
   return (
     <div>
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-md text-gray-700 uppercase bg-[#dde4eb] dark:bg-gray-700 dark:text-gray-300">
-            <tr>
-              <th scope="col" className="py-3 px-6">
-                SL
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Date & Time
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Post Office
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Sender & Type
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Receiver & Type
-              </th>
-              <th scope="col" className="py-3 px-6">
-                <div className="flex items-center">Amount (৳)</div>
-              </th>
-
-              <th scope="col" className="py-3 px-6">
-                Tx Fee (৳)
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Dlv Fee (৳)
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Tx ID
-              </th>
-              <th scope="col" className="py-3 px-6">
-                <Dropdown className=" dark:bg-darkblack-500">
-                  <DropdownTrigger>
-                    <h1 className="flex items-center cursor-pointer">
-                      {selectedTxType}
-                      <svg
-                        className="ml-2 h-4 w-4 dark:bg-gray-600"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </h1>
-                  </DropdownTrigger>
-                  <DropdownMenu
-                    className="text-gray-500 dark:text-gray-400"
-                    aria-label="Transaction Type"
-                    onAction={handleSelect}
-                  >
-                    <DropdownItem key="All">All</DropdownItem>
-                    <DropdownItem key="Opening">Opening</DropdownItem>
-                    <DropdownItem key="Closing">Closing</DropdownItem>
-                    <DropdownItem key="Sending">Sending</DropdownItem>
-                    <DropdownItem key="Receiving">Receiving</DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </th>
-            </tr>
-          </thead>
-
-          <tbody className="bg-white dark:bg-darkblack-600">
-            {hasTransactions ? (
-              transactions.map((transaction, index) => (
-                <tr
-                  key={index}
-                  className={`hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer 
-                      ${
-                        index % 2 === 0
-                          ? transaction.type === "operator"
-                            ? "bg-red-100 dark:bg-red-900"
-                            : "bg-gray-100 dark:bg-darkblack-600"
-                          : transaction.type === "operator"
-                          ? "bg-red-50 dark:bg-red-700"
-                          : "bg-white dark:bg-darkblack-500"
-                      }`}
-                  onClick={() => handleRowClick(transaction)}
+     
+      <div className="overflow-x-auto shadow-lg rounded-xl border border-gray-200 dark:border-gray-700">
+  <table className="min-w-full text-sm text-left text-gray-700 dark:text-gray-300">
+    <thead className="text-xs font-semibold uppercase tracking-wider bg-gray-100 dark:bg-darkblack-500">
+      <tr>
+        {[
+          "SL", "Date & Time", "Post Office", "Sender & Type", "Receiver & Type",
+          "Amount (৳)", "Tx Fee (৳)", "Dlv Fee (৳)", "Tx ID", "Tx Type"
+        ].map((header, idx) => (
+          <th key={idx} className="px-4 py-3 whitespace-nowrap">
+            {header === "Tx Type" ? (
+              <Dropdown className=" dark:bg-darkblack-500">
+                <DropdownTrigger>
+                  <span className="flex items-center cursor-pointer">
+                    {selectedTxType}
+                    <svg
+                      className="ml-2 h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
+                </DropdownTrigger>
+                <DropdownMenu
+                  className="text-gray-700 dark:text-gray-300"
+                  aria-label="Transaction Type"
+                  onAction={handleSelect}
                 >
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {index + 1 + (currentPage - 1) * pageSize}
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.transaction_date}
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.post_office}
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.sender_name} ({transaction.sender_user_type})
-                    <br />
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {transaction.sender_phone}
-                    </span>
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.receiver_name} (
-                    {transaction.receiver_user_type})
-                    <br />
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {transaction.receiver_phone}
-                    </span>
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    <span className="flex">
-                      {new Intl.NumberFormat("en-IN", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }).format(transaction.transaction_amount)}
-                    </span>
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.transaction_fee}
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.delivery_fee}
-                  </td>
-                  <td className="py-2 px-6 text-sm text-gray-700 dark:text-gray-300">
+                  {["All", "Opening", "Closing", "Sending", "Receiving"].map(
+                    (item) => (
+                      <DropdownItem key={item}>{item}</DropdownItem>
+                    )
+                  )}
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              header
+            )}
+          </th>
+        ))}
+      </tr>
+    </thead>
+
+    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+      {hasTransactions ? (
+        transactions.map((transaction, index) => {
+          const rowClass = `hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer ${
+            index % 2 === 0
+              ? transaction.type === "operator"
+                ? "bg-red-50 dark:bg-red-900"
+                : "bg-white dark:bg-darkblack-600"
+              : transaction.type === "operator"
+              ? "bg-red-100 dark:bg-red-800"
+              : "bg-gray-50 dark:bg-darkblack-500"
+          }`;
+
+          return (
+            <tr
+              key={index}
+              className={rowClass}
+              onClick={() => handleRowClick(transaction)}
+            >
+              <td className="px-4 py-3">{index + 1 + (currentPage - 1) * pageSize}</td>
+              <td className="px-4 py-3">{transaction.transaction_date}</td>
+              <td className="px-4 py-3">{transaction.post_office}</td>
+              <td className="px-4 py-3">
+                {transaction.sender_name} ({transaction.sender_user_type})
+                <br />
+                <span className="text-xs text-gray-500">{transaction.sender_phone}</span>
+              </td>
+              <td className="px-4 py-3">
+                {transaction.receiver_name} ({transaction.receiver_user_type})
+                <br />
+                <span className="text-xs text-gray-500">{transaction.receiver_phone}</span>
+              </td>
+              <td className="px-4 py-3 font-medium">
+                {new Intl.NumberFormat("en-IN", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }).format(transaction.transaction_amount)}
+              </td>
+              <td className="px-4 py-3">{transaction.transaction_fee}</td>
+              <td className="px-4 py-3">{transaction.delivery_fee}</td>
+              {/* <td className="px-4 py-3">
+                <button
+                  className="text-blue-600 dark:text-blue-400 hover:underline relative"
+                  title="Click to copy"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    copyToClipboard(transaction.transaction_id);
+                  }}
+                >
+                  {abbreviateId(transaction.transaction_id)}
+                </button>
+                {copiedId === transaction.transaction_id && (
+                  <span className="ml-2 text-green-500 text-xs">Copied!</span>
+                )}
+              </td> */}
+                   <td className="text-blue-600 dark:text-blue-400 relative">
                 
 
-                    <button
-                      className="flex items-center gap-1 relative"
-                      title={transaction.transaction_id} // ✅ Show full ID on hover
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        copyToClipboard(transaction.transaction_id);
-                      }}
-                    >
-                      {abbreviateId(transaction.transaction_id)}
-                      <p className="opacity-0 hover:opacity-100 absolute -mt-6 text-white text-sm bg-gray-700 p-1 rounded">
-                        Copy ID
-                      </p>
-                    </button>
-
-                    {copiedId === transaction.transaction_id && (
-                      <span className="text-green-500 absolute">Copied!</span>
-                    )}
-                  </td>
-                  <td className="py-2 px-6 text-gray-700 dark:text-gray-300">
-                    {transaction.transaction_type}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan="10"
-                  className="text-center py-3 px-6 text-gray-700 dark:text-gray-300"
+                <button
+                  className="flex items-center gap-1 relative"
+                  title={transaction.transaction_id} // ✅ Show full ID on hover
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    copyToClipboard(transaction.transaction_id);
+                  }}
                 >
-                  No transactions found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+                  {abbreviateId(transaction.transaction_id)}
+                  <p className="opacity-0 hover:opacity-100 absolute -mt-6 text-white text-sm bg-gray-700 p-1 rounded">
+                    Copy ID
+                  </p>
+                </button>
+
+                {copiedId === transaction.transaction_id && (
+                  <span className="text-green-500 absolute">Copied!</span>
+                )}
+              </td>
+              <td className="px-4 py-3 capitalize">{transaction.transaction_type}</td>
+            </tr>
+          );
+        })
+      ) : (
+        <tr>
+          <td
+            colSpan="10"
+            className="text-center py-6 text-gray-500 dark:text-gray-400"
+          >
+            No transactions found.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
+
 
       <TransactionDetailModal
         show={showModal}

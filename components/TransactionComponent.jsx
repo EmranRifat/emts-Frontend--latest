@@ -30,7 +30,7 @@ const TransactionComponent = () => {
 
 
 
-    const { data: transactions_state, isLoading, isFetching, error, refetch } = useAllTransactionData(token, search, date, page, pageSize);
+    const { data: transactions_state, isLoading, isFetching, error,refetch: refetch_transaction } = useAllTransactionData(token, search, date, page, pageSize);
     
     
 
