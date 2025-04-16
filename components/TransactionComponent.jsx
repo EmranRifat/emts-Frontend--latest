@@ -14,6 +14,7 @@ import { useAllTransactionData } from "lib/hooks/admin/transaction/fetchAllTrans
 
 const numbers = ["10","20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
+
 const TransactionComponent = () => {
     const [search, setSearch] = useState("");
     const [date, setDate] = useState("");
@@ -23,6 +24,7 @@ const TransactionComponent = () => {
     const [selectedValue, setSelectedValue] = useState("10");
     const [token, setToken] = useState(null);
 
+
     useEffect(() => {
         setToken(cookies.get("access"));
     }, []);
@@ -30,7 +32,7 @@ const TransactionComponent = () => {
 
 
 
-    const { data: transactions_state, isLoading, isFetching, error, refetch } = useAllTransactionData(token, search, date, page, pageSize);
+    const {data: transactions_state, isLoading, isFetching, error, refetch: refetch_transaction } = useAllTransactionData(token, search, date, page, pageSize);
     
     
 
@@ -108,14 +110,14 @@ const TransactionComponent = () => {
                             {/* Left-aligned controls */}
                             <div className="flex justify-start items-start gap-4">
                         
-                          <div className="flex items-center">
+                            <div className="flex items-center gap-2">
+                            <span className="text-gray-600 text-sm">Show:</span>
                                     <Autocomplete
                                         defaultValue={selectedValue}
                                         labelPlacement="outside-left"
-                                        label={<span className="text-gray-600">Show :</span>}
                                         className="max-w-xs"
                                         placeholder={selectedValue}
-                                        style={{ width: "80px", color: "black" }}
+                                        style={{ width: "25px", color: "black" }}
                                         variant="bordered"
                                     >
                                         {numbers.map((number) => (
@@ -168,6 +170,9 @@ const TransactionComponent = () => {
                                     className="overflow-x-auto"
                                 />
                             </div>
+
+
+                            
                             {/*/////////// this part make for center pagination so keep invsible */}
 
                             <div className="invisible">

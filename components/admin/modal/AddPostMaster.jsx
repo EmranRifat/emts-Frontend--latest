@@ -260,6 +260,23 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     label="Post Office"
                   />
 
+
+              <div class="relative w-full max-w-md">
+                <label for="division" class="block text-sm font-medium text-gray-700">Select PostOffice</label>
+                <input type="text" id="division" name="division" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Start typing..." autocomplete="off"/>
+                <ul id="suggestions" class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+                </ul>
+              </div>
+
+
+
+
+
+
+
+
+
+
                   <MaterialInput
                     id="Post Code"
                     name="post_code"

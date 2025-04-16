@@ -169,9 +169,10 @@ function CartFive({ title, amount, groth, memberImg, totalEarnImg, transactionCo
             <span className="text-sm font-medium text-success-300">
               {groth}
             </span>
-            <span className="text-sm font-medium text-bgray-700 dark:text-bgray-50 inline whitespace-nowrap">
-            from last {timeFrame}
-            </span>
+            <p className="text-sm font-medium text-bgray-700 dark:text-bgray-50 inline whitespace-nowrap">
+              from{" "}
+              {timeFrame === "fortnightly" ? "last 15 days" : ` ${timeFrame}`}
+            </p>
           </div>
         </div>
         <div className="w-[106px] h-[68px]">

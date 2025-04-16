@@ -84,7 +84,7 @@ function Requisiton() {
             search={search}
             setSearch={(value) => debouncedSearch(value)}
           />
-          <div className="flex gap-2">
+          <div className="hidden md:block">
             <Filter
               options={["All", "pending", "approved", "rejected"]}
               Filter={Filter}
@@ -119,10 +119,10 @@ function Requisiton() {
                   <Autocomplete
                     defaultValue={selectedValue}
                     labelPlacement="outside-left"
-                    label={<span className="text-gray-600">Show :</span>}
+                    label={<span className="text-gray-600">Show:</span>}
                     className="max-w-xs"
                     placeholder={selectedValue}
-                    style={{ width: "80px", color: "black" }}
+                    style={{ width: "25px", color: "black" }}
                     variant="bordered"
                   >
                     {numbers.map((number) => (
@@ -140,7 +140,7 @@ function Requisiton() {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <p className="text-gray-600 text-sm">Go to page :</p>
+                  <p className="text-gray-600 text-sm">Go to page:</p>
                   <input
                     type="text"
                     className="border border-gray-300 bg-white dark:bg-darkblack-600 rounded px-2 py-1 w-12 md:w-16 text-center text-gray-600"

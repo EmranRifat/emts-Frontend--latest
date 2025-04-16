@@ -12,6 +12,7 @@ import TransactionComponent from "./TransactionComponent";
 import Link from "next/link";
 
 const MainComponent = () => {
+
     const [timeFrame, setTimeFrame] = useState("monthly");
     const [isClient, setIsClient] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -94,6 +95,7 @@ const MainComponent = () => {
                     </DropdownMenu>
                 </Dropdown>
             </div>
+
 
             <div className="2xl:flex 2xl:space-x-12 relative">
                 <div className="mb-6 2xl:mb-0 2xl:flex-1">

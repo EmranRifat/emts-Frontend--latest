@@ -137,7 +137,7 @@ console.log("user>>>>", user);
         <div className="ml-auto flex items-center space-x-3">
           <ModeToggler />
 
-          <p className="text-white text-sm ">
+          <p className="text-white text-sm hidden md:block">
             {user?.userName ? user.userName : ""}
             {user?.userType ? ` (${user.userType.toUpperCase()})` : ""}
           </p>

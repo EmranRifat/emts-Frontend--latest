@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import cookies from "js-cookie";
 import UserFilter from "components/admin/forms/UserFilter";
@@ -18,7 +19,6 @@ import { ToastContainer } from "react-toastify";
 const numbers = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
 function Users() {
-  
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const token = cookies.get("access");
@@ -33,7 +33,6 @@ function Users() {
     error: onboardUsers_state_error,
     isFetching: onboardUsers_state_fetching,
     refetch: refetch_onboardUsers,
-
   } = useAllUsersData(token, search, page, pageSize);
 
   console.log("onboardUsers_state ", onboardUsers_state?.data.total_pages);
@@ -44,7 +43,6 @@ function Users() {
     setInputPage(e.target.value);
   };
 
-  
   const handleGoToPage = () => {
     const pageNumber = parseInt(inputPage, 10);
     if (
@@ -67,11 +65,11 @@ function Users() {
     refetch_onboardUsers();
   };
 
-  const shouldShowPagination = !onboardUsers_state_loading && (onboardUsers_state?.data?.data?.length > 0 ?? false);
+  const shouldShowPagination =
+    !onboardUsers_state_loading &&
+    (onboardUsers_state?.data?.data?.length > 0 ?? false);
 
-  
-  
-    useEffect(() => {
+  useEffect(() => {
     refetch_onboardUsers();
   }, [page, pageSize, refetch_onboardUsers]);
   return (
@@ -103,11 +101,6 @@ function Users() {
         </div>
       </div>
 
-
-
-
-
-
       {shouldShowPagination && (
         <div className="mt-6 px-12 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
@@ -117,10 +110,10 @@ function Users() {
                 <Autocomplete
                   defaultValue={selectedValue}
                   labelPlacement="outside-left"
-                  label={<span className="text-gray-600">Show :</span>}
+                  label={<span className="text-gray-600">Show:</span>}
                   className="max-w-xs"
                   placeholder={selectedValue}
-                  style={{ width: "80px", color: "black" }}
+                  style={{ width: "25px", color: "black" }}
                   variant="bordered"
                 >
                   {numbers.map((number) => (
@@ -138,7 +131,7 @@ function Users() {
               </div>
 
               <div className="flex items-center space-x-2">
-                <p className="text-gray-600 text-sm">Go to page :</p>
+                <p className="text-gray-600 text-sm ">Go to page:</p>
                 <input
                   type="text"
                   className="border border-gray-300 bg-white dark:bg-darkblack-600 rounded px-2 py-1 w-12 md:w-16 text-center text-gray-600"
@@ -167,7 +160,7 @@ function Users() {
                 showShadow
                 color="primary"
                 page={current_page || 1}
-                total={ onboardUsers_state?.data.total_pages || 5}
+                total={onboardUsers_state?.data.total_pages || 5}
                 onChange={(page) => setCurrentPage(page)}
                 className="overflow-x-auto"
               />
