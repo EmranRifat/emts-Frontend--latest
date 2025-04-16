@@ -41,7 +41,6 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
   const [isLongPress, setIsLongPress] = useState(false);
   const longPressTimer = useRef(null);
 
-
   const handleLongPressStart = (action) => {
     setIsLongPress(true);
     longPressTimer.current = setTimeout(() => {
@@ -52,7 +51,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
       }
 
       setIsLongPress(false);
-    }, 1000); 
+    }, 1000);
   };
 
   const handleLongPressEnd = () => {
@@ -202,7 +201,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
           </ModalHeader>
           <ModalBody>
             <div className="space-y-4 dark:text-gray-300">
-              <div className="flex border-b">
+              <div className="flex border-b bg-[#fdd09d70] dark:bg-darkblack-600 p-4 rounded-md">
                 {/* User Details */}
                 <div className="pb-4 ">
                   <strong className="text-lg">Details of - </strong>{" "}
@@ -223,38 +222,53 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                   </p>
                 </div>
 
-               
-               <div className="flex justify-center md:pl-24">
-                {userStatus === "disabled" ? (
-                  <Button
-                    onPointerDown={() => handleLongPressStart("enable")}
-                    onPointerUp={handleLongPressEnd}
-                    onPointerLeave={handleLongPressEnd}
-                    variant="ghost"
-                    className={`text-green-500 font-semibold ${isLongPress ? "animate-long-press" : ""}`}
-                  >
-                    <Image src="/Tableicon/success.svg" alt="Enable icon" width={16} height={16} />
-                    Enable
-                    {isLongPress && (
-                      <span className="long-press-progress"></span>
-                    )}
-                  </Button>
-                ) : (
-                  <Button
-                    onPointerDown={() => handleLongPressStart("disable")}
-                    onPointerUp={handleLongPressEnd}
-                    onPointerLeave={handleLongPressEnd}
-                    variant="ghost"
-                    className={`text-red-500  font-semibold ${isLongPress ? "animate-long-press" : ""}`}
-                  >
-                    <Image src="/Tableicon/disable.svg" alt="Disable icon" width={16} height={16} />
-                    Disable
-                    {isLongPress && (
-                      <span className="long-press-progress"></span>
-                    )}
-                  </Button>
-                )}
-              </div>
+                <div className="flex justify-center md:pl-24">
+                  {userStatus === "disabled" ? (
+                    <Button
+                      onPointerDown={() => handleLongPressStart("enable")}
+                      onPointerUp={handleLongPressEnd}
+                      onPointerLeave={handleLongPressEnd}
+                      color="primary"
+                      variant="faded"
+                      className={`text-green-500  font-semibold ${
+                        isLongPress ? "animate-long-press" : ""
+                      }`}
+                    >
+                      <Image
+                        src="/Tableicon/success.svg"
+                        alt="Enable icon"
+                        width={16}
+                        height={16}
+                      />
+                      Enable
+                      {isLongPress && (
+                        <span className="long-press-progress"></span>
+                      )}
+                    </Button>
+                  ) : (
+                    <Button
+                      onPointerDown={() => handleLongPressStart("disable")}
+                      onPointerUp={handleLongPressEnd}
+                      onPointerLeave={handleLongPressEnd}
+                      color="primary"
+                      variant="faded"
+                      className={`text-red-500  font-semibold ${
+                        isLongPress ? "animate-long-press" : ""
+                      }`}
+                    >
+                      <Image
+                        src="/Tableicon/disable.svg"
+                        alt="Disable icon"
+                        width={16}
+                        height={16}
+                      />
+                      Disable
+                      {isLongPress && (
+                        <span className="long-press-progress"></span>
+                      )}
+                    </Button>
+                  )}
+                </div>
               </div>
               {error && <p className="text-red-500">{error}</p>}
 
@@ -286,13 +300,15 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-darkblack-600 !important text-sm">
-                  {Array.isArray(possData) && possData.length > 0 ? (
+                  <tbody className="bg-white dark:bg-darkblack-600 text-sm">
+                    {Array.isArray(possData) && possData.length > 0 ? (
                       posMachineData.map((poss, index) => (
                         <tr
                           key={index}
-                          className={` ${
-                            index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                          className={`${
+                            index % 2 === 0
+                              ? "bg-gray-50 dark:bg-gray-800" // Even row in light mode and dark mode
+                              : "bg-white dark:bg-gray-900" // Odd row in light mode and dark mode
                           }`}
                         >
                           <td className="py-0.5 px-2">{index + 1}</td>
@@ -307,7 +323,6 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                             {poss.pos_machine_updated_at}
                           </td>
 
-                      
                           {console.log(
                             "is_active status for POS Machine ID",
                             poss.pos_machine_id,
@@ -382,7 +397,11 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button className="dark:text-red-600 darkfont-semibold" color="error" onClick={handleCloseModal}>
+            <Button
+              className="text-red-600 hover:text-red-800 hover:bg-red-100 font-semibold"
+              color="error"
+              onClick={handleCloseModal}
+            >
               Close
             </Button>
           </ModalFooter>
@@ -406,7 +425,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
         togglePosBindStatus={togglePosBindStatus}
       />
       <ToastContainer />
-   
+
       <style jsx>{`
         .long-press-progress {
           position: absolute;
@@ -414,7 +433,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
           left: 0;
           width: 0%;
           height: 100%;
-          background:rgba(0, 123, 255, 0.7);
+          background: rgba(0, 123, 255, 0.7);
           animation: slide-progress 1s linear forwards;
         }
 

@@ -194,3 +194,43 @@ body {
     text-wrap: balance;
   }
 }
+
+
+
+
+
+
+
+
+
+@keyframes moveBorder {
+  0% {
+    border-color: transparent;
+    transform: scale(1);
+  }
+  50% {
+    border-color: #1cc438; /* Red color */
+    transform: scale(1.05); /* Slight scale effect */
+  }
+  100% {
+    border-color: transparent;
+    transform: scale(1);
+  }
+}
+
+/* Apply the animation to the button */
+.moving-border-btn {
+  color:#0db616; /* Text color */
+  border: 2px solid transparent;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  animation: moveBorder 2s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.moving-border-btn:hover {
+  background-color: #B01A1A; /* Darken on hover */
+  cursor: pointer;
+}
