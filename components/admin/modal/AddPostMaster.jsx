@@ -24,6 +24,7 @@ import MaterialTextarea from "components/common/MaterialTextarea";
 import MaterialSelect from "components/common/MaterialSelect";
 import MaterialInput from "components/common/MaterialInput";
 import { toast, ToastContainer } from "react-toastify";
+import { useAllPostOfficeData } from "../../../lib/hooks/utils/usePostofficedata";
 
 export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
   const { mutate } = useOnboardUser();
@@ -95,14 +96,6 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     }));
   };
 
-  // const handleAC_TypeChange = (value) => {
-  //   console.log("Selected ac_balance_type:", value);
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     ac_balance_type: value,
-  //   }));
-  // };
-
   const handleAC_TypeChange = (value) => {
     console.log("Selected ac_balance_type:", value);
     setFormData((prevData) => ({
@@ -155,6 +148,31 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
         },
       }
     );
+  };
+
+  const [query, setQuery] = useState("");
+  const [filteredPostoffice, setFilteredPostoffice] = useState([]);
+
+  const { data, status } = useAllPostOfficeData(query);
+
+  useEffect(() => {
+    if (status === "success" && data?.data) {
+      setFilteredPostoffice(data.data);
+    } else {
+      setFilteredPostoffice([]);
+    }
+  }, [data, status]);
+
+  const handlePostofficeChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSelect = (postOffice) => {
+    setQuery(
+      // ${postOffice.police_station.en_name}, ${postOffice.district.en_name}, ${postOffice.division.en_name} 
+      `${postOffice.en_name}, (${postOffice.code})`
+    );
+    setFilteredPostoffice([]);
   };
 
   return (
@@ -260,22 +278,41 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     label="Post Office"
                   />
 
+                  <div className="relative w-full max-w-md mx-auto ">
+                    <label
+                      htmlFor="division"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Select Post-office
+                    </label>
+                    <input
+                      id="division"
+                      type="text"
+                      value={query}
+                      onChange={handlePostofficeChange}
+                      placeholder="Start typing..."
+                      className="w-full rounded-md border bg-white dark:bg-gray-900 border-gray-300 shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      autoComplete="off"
+                    />
 
-              <div class="relative w-full max-w-md">
-                <label for="division" class="block text-sm font-medium text-gray-700">Select PostOffice</label>
-                <input type="text" id="division" name="division" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Start typing..." autocomplete="off"/>
-                <ul id="suggestions" class="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
-                </ul>
-              </div>
 
+                    {filteredPostoffice.length > 0 && (
+                      <ul className="absolute z-10 mt-1 w-full bg-slate-100 dark:bg-gray-900 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                        {filteredPostoffice.map((item, index) => (
+                          <li
+                            key={index}
+                            onClick={() => handleSelect(item)}
+                            className="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white"
+                          >
+                            {/* ${item.district.en_name},  ${item.division.en_name} ${item.police_station.en_name},*/}
+                            {`${item.en_name},  ${item.code}`}
+                          </li>
+                        ))}
+                        
+                      </ul>
+                    )}
 
-
-
-
-
-
-
-
+                  </div>
 
                   <MaterialInput
                     id="Post Code"

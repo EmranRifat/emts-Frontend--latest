@@ -17,8 +17,7 @@ function UserFilter({ search, setSearch, refetch  }) {
     <div>
        <Button
         color="primary" variant="faded"
-          className="rounded-lg  mx-4 font-bold  moving-border-btn
-"
+          className="rounded-lg  mx-4 font-bold  moving-border-btn enroll-btn"
           onPress={() => onOpenChange(true)}
         >
           + Add Postmaster
@@ -72,6 +71,12 @@ function UserFilter({ search, setSearch, refetch  }) {
           </button>
         </div>
       </div>
+     
+     
+     
+
+
+
 
       <div>
        

@@ -234,3 +234,10 @@ body {
   background-color: #B01A1A; /* Darken on hover */
   cursor: pointer;
 }
+.enroll-btn {
+  background: linear-gradient(136.85deg, #ff37f2 -15.82%, #405aff 99.57%);
+  color: #fff !important;
+  border: none;
+}
+
+
