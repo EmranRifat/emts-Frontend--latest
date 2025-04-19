@@ -150,9 +150,10 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     );
   };
 
+  // ******************implimenting post office search**********************
+
   const [query, setQuery] = useState("");
   const [filteredPostoffice, setFilteredPostoffice] = useState([]);
-
   const { data, status } = useAllPostOfficeData(query);
 
   useEffect(() => {
@@ -169,8 +170,8 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
 
   const handleSelect = (postOffice) => {
     setQuery(
-      // ${postOffice.police_station.en_name}, ${postOffice.district.en_name}, ${postOffice.division.en_name} 
-      `${postOffice.en_name}, (${postOffice.code})`
+      // ${postOffice.police_station.en_name}, ${postOffice.district.en_name}, ${postOffice.division.en_name}
+      `${postOffice.en_name}, ${postOffice.code}`
     );
     setFilteredPostoffice([]);
   };
@@ -281,7 +282,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                   <div className="relative w-full max-w-md mx-auto ">
                     <label
                       htmlFor="division"
-                      className="block text-sm font-medium text-gray-700 mb-1"
+                      className="block text-sm font-medium dark:text-white text-gray-700 mb-1"
                     >
                       Select Post-office
                     </label>
@@ -295,8 +296,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                       autoComplete="off"
                     />
 
-
-                    {filteredPostoffice.length > 0 && (
+                    {/* {filteredPostoffice.length > 0 && (
                       <ul className="absolute z-10 mt-1 w-full bg-slate-100 dark:bg-gray-900 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
                         {filteredPostoffice.map((item, index) => (
                           <li
@@ -304,14 +304,44 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                             onClick={() => handleSelect(item)}
                             className="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white"
                           >
-                            {/* ${item.district.en_name},  ${item.division.en_name} ${item.police_station.en_name},*/}
-                            {`${item.en_name},  ${item.code}`}
+                            {`${item.en_name}, ${item.code}`}
                           </li>
                         ))}
-                        
+
+                      </ul>
+                    )} */}
+                    {filteredPostoffice.length > 0 && (
+                      <ul className="absolute z-10 mt-1 w-full bg-slate-100 dark:bg-gray-900 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                        {filteredPostoffice.map((item, index) => {
+                          console.log("item", item);
+                          const fullText = `${item.en_name}, ${item.police_station.en_name},   ${item.code}`;
+                          const parts = fullText.split(
+                            new RegExp(`(${query})`, "gi")
+                          );
+
+                          return (
+                            <li
+                              key={index}
+                              onClick={() => handleSelect(item)}
+                              className="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white"
+                            >
+                              {parts.map((part, i) =>
+                                part.toLowerCase() === query.toLowerCase() ? (
+                                  <span
+                                    key={i}
+                                    className="bg-yellow-300 rounded px-1 text-black"
+                                  >
+                                    {part}
+                                  </span>
+                                ) : (
+                                  <span key={i}>{part}</span>
+                                )
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     )}
-
                   </div>
 
                   <MaterialInput
@@ -376,6 +406,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     type="number"
                     label="Max Postman"
                   />
+
                   <MaterialSelect
                     isRequired={true}
                     name="ac_types"
