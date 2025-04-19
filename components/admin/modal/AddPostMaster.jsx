@@ -46,8 +46,8 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     last_name: "",
     phone_number: "",
     password: "",
-    post_office: selectedPostOffice,
-    post_code: selectedPostOfficeCode,
+    post_office: "",
+    post_code: "",
     nid: "",
     gender: "",
     daily_limit: "",
@@ -68,8 +68,8 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
         last_name: "",
         phone_number: "",
         password: "",
-        post_office: selectedPostOffice,
-        post_code: selectedPostOfficeCode,
+        post_office: "",
+        post_code: "",
         nid: "",
         gender: "",
         daily_limit: "",
@@ -154,12 +154,13 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     );
   };
 
+
   // ******************implimenting post office search**********************
 
   const [query, setQuery] = useState("");
   const [filteredPostoffice, setFilteredPostoffice] = useState([]);
   const { data, status } = useAllPostOfficeData(query);
-console.log("query data ---->>", query);
+  console.log("query data ---->>", query);
   
 
 useEffect(() => {
@@ -454,7 +455,7 @@ useEffect(() => {
                       name="nid_front_page"
                       type="file"
                       onChange={handleFileChange}
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-lg border bg-[#e4b0b070] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none text-gray-600  dark:text-white"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-lg border bg-[#b0cfe470] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none text-gray-600  dark:text-white"
                     />
                   </div>
 
