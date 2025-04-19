@@ -34,10 +34,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
 
   const genders = ["Male", "Female", "Other"];
   const ac_types = ["prepaid", "postpaid"];
-  const [selectedPostOffice, setSelectedPostOffice] = useState(null);
-  const [selectedPostOfficeCode, setSelectedPostOfficeCode] = useState(null);
-
-  console.log("selectedPostOffice & selectedPostOfficeCode >>", selectedPostOffice, selectedPostOfficeCode);
+  /
 
   const [formData, setFormData] = useState({
     user_type: "accountant",
@@ -101,7 +98,6 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
   };
 
   const handleAC_TypeChange = (value) => {
-    console.log("Selected ac_balance_type:", value);
     setFormData((prevData) => ({
       ...prevData,
       ac_balance_type: value,
@@ -188,8 +184,7 @@ useEffect(() => {
   const handleSelect = (postOffice) => {
     const formatted = `${postOffice.en_name},${postOffice.police_station.en_name}`;
     setQuery(formatted);
-    setSelectedPostOffice(formatted);
-    setSelectedPostOfficeCode(postOffice.code);
+
     setFilteredPostoffice([]);
   
     // Optionally sync to formData right here
