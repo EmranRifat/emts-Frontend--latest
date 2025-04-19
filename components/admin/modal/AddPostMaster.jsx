@@ -34,6 +34,10 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
 
   const genders = ["Male", "Female", "Other"];
   const ac_types = ["prepaid", "postpaid"];
+  const [selectedPostOffice, setSelectedPostOffice] = useState(null);
+  const [selectedPostOfficeCode, setSelectedPostOfficeCode] = useState(null);
+
+  console.log("selectedPostOffice & selectedPostOfficeCode >>", selectedPostOffice, selectedPostOfficeCode);
 
   const [formData, setFormData] = useState({
     user_type: "accountant",
@@ -42,8 +46,8 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     last_name: "",
     phone_number: "",
     password: "",
-    post_office: "",
-    post_code: "",
+    post_office: selectedPostOffice,
+    post_code: selectedPostOfficeCode,
     nid: "",
     gender: "",
     daily_limit: "",
@@ -64,8 +68,8 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
         last_name: "",
         phone_number: "",
         password: "",
-        post_office: "",
-        post_code: "",
+        post_office: selectedPostOffice,
+        post_code: selectedPostOfficeCode,
         nid: "",
         gender: "",
         daily_limit: "",
@@ -120,7 +124,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
   const handleFormSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    // console.log("Form data before submission:", formData);
+    console.log("Form data before submission:", formData);
 
     mutate(
       { formData, token },
@@ -155,8 +159,10 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
   const [query, setQuery] = useState("");
   const [filteredPostoffice, setFilteredPostoffice] = useState([]);
   const { data, status } = useAllPostOfficeData(query);
+console.log("query data ---->>", query);
+  
 
-  useEffect(() => {
+useEffect(() => {
     if (status === "success" && data?.data) {
       setFilteredPostoffice(data.data);
     } else {
@@ -168,13 +174,32 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     setQuery(e.target.value);
   };
 
+
+  // const handleSelect = (postOffice) => {
+  //   setQuery(
+  //     // ${postOffice.police_station.en_name}, ${postOffice.district.en_name}, ${postOffice.division.en_name}
+  //     `${postOffice.en_name}, ${postOffice.code}`
+  //   );
+  //   setFilteredPostoffice([]);
+  // };
+
+
   const handleSelect = (postOffice) => {
-    setQuery(
-      // ${postOffice.police_station.en_name}, ${postOffice.district.en_name}, ${postOffice.division.en_name}
-      `${postOffice.en_name}, ${postOffice.code}`
-    );
+    const formatted = `${postOffice.en_name},${postOffice.police_station.en_name}`;
+    setQuery(formatted);
+    setSelectedPostOffice(formatted);
+    setSelectedPostOfficeCode(postOffice.code);
     setFilteredPostoffice([]);
+  
+    // Optionally sync to formData right here
+    setFormData((prev) => ({
+      ...prev,
+      post_office: formatted,
+      post_code: postOffice.code,
+    }));
   };
+  
+   
 
   return (
     <>
@@ -187,19 +212,19 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
       >
         <ModalContent>
           <Card>
-            <div className="border-b bg-gray-300 dark:bg-postDark ">
-              <CardHeader className=" gap-4 ml-8  mt-4 ">
-                <Image
-                  src="/logo/logo-post.svg"
-                  alt="image"
-                  width={42}
-                  height={42}
-                />
-                <h2 className="font-semibold text-gray-700 dark:text-white text-xl ">
-                  Post-Master Onboarding Form
-                </h2>
-              </CardHeader>
-            </div>
+          <div className="border-b bg-gradient-to-r from-gray-300 to-indigo-400 dark:from-postDark dark:to-gray-800">
+  <CardHeader className="gap-4 ml-8 mt-4">
+    <Image
+      src="/logo/logo-post.svg"
+      alt="image"
+      width={42}
+      height={42}
+    />
+    <h2 className="font-semibold text-gray-700 dark:text-white text-xl">
+      Post-Master Onboarding Form
+    </h2>
+  </CardHeader>
+</div>
 
             <ModalBody>
               {error && (
@@ -269,7 +294,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     label="NID"
                   />
 
-                  <MaterialInput
+                  {/* <MaterialInput
                     id="Post Office"
                     name="post_office"
                     whenChange={handleInputChange}
@@ -277,14 +302,14 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     error={""}
                     type="text"
                     label="Post Office"
-                  />
+                  /> */}
 
                   <div className="relative w-full max-w-md mx-auto ">
                     <label
                       htmlFor="division"
-                      className="block text-sm font-medium dark:text-white text-gray-700 mb-1"
+                      className="block text-md font-medium dark:text-white text-gray-700 mb-1"
                     >
-                      Select Post-office
+                      Select Post-office & PostCode
                     </label>
                     <input
                       id="division"
@@ -323,8 +348,8 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                             <li
                               key={index}
                               onClick={() => handleSelect(item)}
-                              className="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white"
-                            >
+                              className="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white border-b border-dashed border-gray-300"
+                              >
                               {parts.map((part, i) =>
                                 part.toLowerCase() === query.toLowerCase() ? (
                                   <span
@@ -344,7 +369,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     )}
                   </div>
 
-                  <MaterialInput
+                  {/* <MaterialInput
                     id="Post Code"
                     name="post_code"
                     whenChange={handleInputChange}
@@ -352,7 +377,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     error={""}
                     type="number"
                     label="Post Code"
-                  />
+                  /> */}
 
                   <MaterialSelect
                     isRequired={true}
@@ -429,11 +454,11 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                       name="nid_front_page"
                       type="file"
                       onChange={handleFileChange}
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-lg border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none text-gray-600  dark:text-white"
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-lg border bg-[#e4b0b070] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none text-gray-600  dark:text-white"
                     />
                   </div>
 
-                  <MaterialTextarea
+                  {/* <MaterialTextarea
                     id="Comments"
                     name="comments"
                     whenChange={handleInputChange}
@@ -441,7 +466,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
                     error={""}
                     type="text"
                     label="Comments"
-                  />
+                  /> */}
                 </CardBody>
 
                 <CardFooter className="justify-end gap-1">

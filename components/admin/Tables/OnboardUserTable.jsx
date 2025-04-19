@@ -90,7 +90,7 @@ function OnboardPostMasterTable({
                     tabIndex={0}
                     className="hover:text-primary-500 focus:outline-none"
                   >
-                    {user.first_name} {user.last_name}
+                    {user.first_name}  {user.last_name}
                   </span>
 
                   <span
