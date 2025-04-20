@@ -34,8 +34,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
 
   const genders = ["Male", "Female", "Other"];
   const ac_types = ["prepaid", "postpaid"];
-  /
-
+  
   const [formData, setFormData] = useState({
     user_type: "accountant",
     email: "",
@@ -167,6 +166,7 @@ useEffect(() => {
     }
   }, [data, status]);
 
+
   const handlePostofficeChange = (e) => {
     setQuery(e.target.value);
   };
@@ -184,7 +184,6 @@ useEffect(() => {
   const handleSelect = (postOffice) => {
     const formatted = `${postOffice.en_name},${postOffice.police_station.en_name}`;
     setQuery(formatted);
-
     setFilteredPostoffice([]);
   
     // Optionally sync to formData right here
