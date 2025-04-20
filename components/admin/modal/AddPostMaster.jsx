@@ -304,7 +304,7 @@ useEffect(() => {
                       htmlFor="division"
                       className="block text-md font-medium dark:text-white text-gray-700 mb-1"
                     >
-                      Select Post-office & PostCode
+                      Select Post-Office 
                     </label>
                     <input
                       id="division"
