@@ -80,6 +80,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     }
   }, [isOpen]);
 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -96,6 +97,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     }));
   };
 
+
   const handleAC_TypeChange = (value) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -103,6 +105,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
       daily_limit: value === "prepaid" ? "0.00" : prevData.daily_limit,
     }));
   };
+
 
   const handleFileChange = (e) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -116,10 +119,12 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     }));
   };
 
+
   const handleFormSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     console.log("Form data before submission:", formData);
+
 
     mutate(
       { formData, token },
@@ -172,29 +177,23 @@ useEffect(() => {
   };
 
 
-  // const handleSelect = (postOffice) => {
-  //   setQuery(
-  //     // ${postOffice.police_station.en_name}, ${postOffice.district.en_name}, ${postOffice.division.en_name}
-  //     `${postOffice.en_name}, ${postOffice.code}`
-  //   );
-  //   setFilteredPostoffice([]);
-  // };
-
 
   const handleSelect = (postOffice) => {
-    const formatted = `${postOffice.en_name},${postOffice.police_station.en_name}`;
+    const formatted = `${postOffice.en_name},${postOffice.police_station.en_name} (${postOffice.code})`;
     setQuery(formatted);
     setFilteredPostoffice([]);
   
     // Optionally sync to formData right here
     setFormData((prev) => ({
       ...prev,
-      post_office: formatted,
+      post_office: postOffice.en_name,
       post_code: postOffice.code,
     }));
+
   };
+
   
-   
+  
 
   return (
     <>
@@ -299,6 +298,7 @@ useEffect(() => {
                     label="Post Office"
                   /> */}
 
+
                   <div className="relative w-full max-w-md mx-auto ">
                     <label
                       htmlFor="division"
@@ -333,11 +333,12 @@ useEffect(() => {
                     {filteredPostoffice.length > 0 && (
                       <ul className="absolute z-10 mt-1 w-full bg-slate-100 dark:bg-gray-900 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
                         {filteredPostoffice.map((item, index) => {
-                          console.log("item", item);
-                          const fullText = `${item.en_name}, ${item.police_station.en_name},   ${item.code}`;
+                          // console.log("item", item);
+                          const fullText = `${item.en_name}, ${item.police_station.en_name}, ${item.code}`;
                           const parts = fullText.split(
                             new RegExp(`(${query})`, "gi")
                           );
+
 
                           return (
                             <li
