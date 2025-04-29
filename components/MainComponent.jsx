@@ -19,12 +19,13 @@ const MainComponent = () => {
     const router = useRouter();
     const { data } = useLoginSsoRedirectToken();
 
-    // ✅ Ensure component only renders on client
     useEffect(() => {
         setIsClient(true);
     }, []);
 
-    // ✅ Prevent SSR execution for authentication check
+
+
+
     useEffect(() => {
         if (isClient) {
             if (!Cookies.get("access") || !Cookies.get("refresh")) {

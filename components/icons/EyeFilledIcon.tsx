@@ -2,7 +2,6 @@ import React, { SVGProps } from "react";
 
 interface MailIconProps extends SVGProps<SVGSVGElement> { }
 
-
 export const EyeFilledIcon: React.FC<MailIconProps> = (props) => (
     <svg
         aria-hidden="true"

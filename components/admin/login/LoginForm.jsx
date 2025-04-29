@@ -44,25 +44,26 @@ function LoginForm() {
       console.log("login values==>>", values);
 
       mutate(values, {
+     
         onSuccess: (response) => {
           console.log("login User Response == >>>", response);
-          console.log("Form submitted successfully");
-          console.log("response", response);
-          
+        
           if (response.access && response.refresh) {
-            Cookies.set("access", response.access);
-            Cookies.set("refresh", response.refresh);
-            Cookies.set("userName", response.user_name);
-            Cookies.set("userType", response.user_type);
-
+            Cookies.set("access", response.access, { expires: 1 });
+            Cookies.set("refresh", response.refresh, { expires: 7 });
+            Cookies.set("userName", response.user_name, { expires: 1 });
+            Cookies.set("userType", response.user_type, { expires: 1 });
+        
             setError("");
             setLoading(false);
+        
             router.push("/");
           } else {
-            setError(response.message);
+            setError(response.message || "Login failed. Please try again.");
             setLoading(false);
           }
         },
+        
         onError: (response) => {
           setLoading(false);
           console.log("An error occured while submiting the form");

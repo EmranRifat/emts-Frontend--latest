@@ -34,7 +34,7 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
 
   const genders = ["Male", "Female", "Other"];
   const ac_types = ["prepaid", "postpaid"];
-  
+
   const [formData, setFormData] = useState({
     user_type: "accountant",
     email: "",
@@ -76,10 +76,11 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
         nid_front_image: null,
         ac_balance_type: "",
       });
+
+      setQuery(""); // <--clear query too when modal closes
       setError("");
     }
   }, [isOpen]);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -97,7 +98,6 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     }));
   };
 
-
   const handleAC_TypeChange = (value) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -105,7 +105,6 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
       daily_limit: value === "prepaid" ? "0.00" : prevData.daily_limit,
     }));
   };
-
 
   const handleFileChange = (e) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -119,12 +118,10 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     }));
   };
 
-
   const handleFormSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     console.log("Form data before submission:", formData);
-
 
     mutate(
       { formData, token },
@@ -154,16 +151,14 @@ export default function AddPostMaster({ isOpen, onOpenChange, refetch }) {
     );
   };
 
-
   // ******************implimenting post office search**********************
 
   const [query, setQuery] = useState("");
   const [filteredPostoffice, setFilteredPostoffice] = useState([]);
   const { data, status } = useAllPostOfficeData(query);
   console.log("query data ---->>", query);
-  
 
-useEffect(() => {
+  useEffect(() => {
     if (status === "success" && data?.data) {
       setFilteredPostoffice(data.data);
     } else {
@@ -171,29 +166,22 @@ useEffect(() => {
     }
   }, [data, status]);
 
-
   const handlePostofficeChange = (e) => {
     setQuery(e.target.value);
   };
-
-
 
   const handleSelect = (postOffice) => {
     const formatted = `${postOffice.en_name},${postOffice.police_station.en_name} (${postOffice.code})`;
     setQuery(formatted);
     setFilteredPostoffice([]);
-  
+
     // Optionally sync to formData right here
     setFormData((prev) => ({
       ...prev,
       post_office: postOffice.en_name,
       post_code: postOffice.code,
     }));
-
   };
-
-  
-  
 
   return (
     <>
@@ -206,19 +194,19 @@ useEffect(() => {
       >
         <ModalContent>
           <Card>
-          <div className="border-b bg-gradient-to-r from-gray-300 to-indigo-400 dark:from-postDark dark:to-gray-800">
-  <CardHeader className="gap-4 ml-8 mt-4">
-    <Image
-      src="/logo/logo-post.svg"
-      alt="image"
-      width={42}
-      height={42}
-    />
-    <h2 className="font-semibold text-gray-700 dark:text-white text-xl">
-      Post-Master Onboarding Form
-    </h2>
-  </CardHeader>
-</div>
+            <div className="border-b bg-gradient-to-r from-gray-300 to-indigo-400 dark:from-postDark dark:to-gray-800">
+              <CardHeader className="gap-4 ml-8 mt-4">
+                <Image
+                  src="/logo/logo-post.svg"
+                  alt="image"
+                  width={42}
+                  height={42}
+                />
+                <h2 className="font-semibold text-gray-700 dark:text-white text-xl">
+                  Post-Master Onboarding Form
+                </h2>
+              </CardHeader>
+            </div>
 
             <ModalBody>
               {error && (
@@ -298,13 +286,12 @@ useEffect(() => {
                     label="Post Office"
                   /> */}
 
-
                   <div className="relative w-full max-w-md mx-auto ">
                     <label
                       htmlFor="division"
                       className="block text-md font-medium dark:text-white text-gray-700 mb-1"
                     >
-                      Select Post-Office 
+                      Select Post-Office
                     </label>
                     <input
                       id="division"
@@ -330,6 +317,7 @@ useEffect(() => {
 
                       </ul>
                     )} */}
+
                     {filteredPostoffice.length > 0 && (
                       <ul className="absolute z-10 mt-1 w-full bg-slate-100 dark:bg-gray-900 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
                         {filteredPostoffice.map((item, index) => {
@@ -339,13 +327,12 @@ useEffect(() => {
                             new RegExp(`(${query})`, "gi")
                           );
 
-
                           return (
                             <li
                               key={index}
                               onClick={() => handleSelect(item)}
                               className="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white border-b border-dashed border-gray-300"
-                              >
+                            >
                               {parts.map((part, i) =>
                                 part.toLowerCase() === query.toLowerCase() ? (
                                   <span

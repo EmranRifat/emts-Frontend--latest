@@ -5,6 +5,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
 import { usePossData } from "lib/hooks/admin/users/usePossData";
@@ -333,7 +334,9 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                           <td className="py-0.5 pl-3 cursor-pointer">
                             {/* Check if the POS machine is inactive */}
                             {poss.is_active === false ? (
-                              <Image
+                               
+                               <Tooltip color="primary" content="Click Bind" showArrow={true}>
+                             <Image
                                 onClick={() =>
                                   handleConfirmBind(
                                     poss.pos_machine_id,
@@ -346,7 +349,9 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                                 src="/Tableicon/red lock.svg"
                                 alt="Red lock icon"
                               />
+                              </Tooltip>
                             ) : poss.is_active === true ? (
+                              <Tooltip color="primary" content="Click UnBind " showArrow={true}>
                               <Image
                                 onClick={() =>
                                   handleConfirmUnbind(
@@ -360,6 +365,7 @@ function PosDataModal({ isModalOpen, handleCloseModal, user }) {
                                 src="/Tableicon/lock-closed.svg"
                                 alt="Closed lock icon"
                               />
+                              </Tooltip>
                             ) : (
                               <Image
                                 onClick={() =>

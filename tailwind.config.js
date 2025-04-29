@@ -85,10 +85,23 @@ module.exports = {
           100: "#FFC837",
           500: "#F6A723",
         },
+
+      
+
+
+
+
+
+
         purple: "#936DFF",
         primaryNew: "#B7FFD1",
-        primary: "#22C55E",
-        primaryBase: "#22C55E",
+        default: "#f3f4f6",
+        primary: "#3b82f6",    
+        secondary: "#f59e0b",   
+        success: "#22c55e",     
+        warning: "#facc15",    
+        danger: "#ef4444",     
+        foreground: "#111827", 
         portage: "#936DFF",
         basicInterface: "#04091E",
         basicInterface2: "#F5F5F5",

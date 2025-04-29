@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pagination, Spinner, useDisclosure } from "@nextui-org/react";
+import { Pagination, Spinner, useDisclosure ,Tooltip} from "@nextui-org/react";
 import PosDataModal from "../modal/PossMatchineDataModal";
 import UpdatePostMaster from "../modal/UpdateOnbordingModal";
 
@@ -46,6 +46,7 @@ function OnboardPostMasterTable({
     );
   }
 
+
   return (
     <div>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600">
@@ -85,6 +86,9 @@ function OnboardPostMasterTable({
                 </td>
 
                 <td className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-200 flex gap-2 items-center">
+               
+                 <Tooltip color="primary" content="Edit onboard data" showArrow={true}>
+
                   <span
                     onClick={() => handleUpdateOpen(user)}
                     tabIndex={0}
@@ -92,6 +96,8 @@ function OnboardPostMasterTable({
                   >
                     {user.first_name}  {user.last_name}
                   </span>
+                  </Tooltip>
+                  <Tooltip color="warning" content="Click for Bind or Unbind" showArrow={true}>
 
                   <span
                     className="cursor-pointer flex items-center justify-center w-6 h-6"
@@ -104,6 +110,7 @@ function OnboardPostMasterTable({
                       className="w-4 h-4 object-contain"
                     />
                   </span>
+                  </Tooltip>
                 </td>
 
                 <td className="px-2 py-3 text-gray-600 dark:text-gray-300">
